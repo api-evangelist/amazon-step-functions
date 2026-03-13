@@ -1,0 +1,113 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sfn": "https://docs.aws.amazon.com/step-functions/latest/apireference/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "StateMachine": {
+      "@id": "sfn:StateMachine",
+      "@context": {
+        "stateMachineArn": "sfn:stateMachineArn",
+        "name": "schema:name",
+        "status": "sfn:status",
+        "definition": "sfn:definition",
+        "roleArn": "sfn:roleArn",
+        "type": "sfn:type",
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "loggingConfiguration": "sfn:loggingConfiguration",
+        "tracingConfiguration": "sfn:tracingConfiguration",
+        "tags": {
+          "@id": "sfn:tags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Execution": {
+      "@id": "sfn:Execution",
+      "@context": {
+        "executionArn": "sfn:executionArn",
+        "stateMachineArn": "sfn:stateMachineArn",
+        "name": "schema:name",
+        "status": "sfn:status",
+        "startDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "stopDate": {
+          "@id": "sfn:stopDate",
+          "@type": "xsd:dateTime"
+        },
+        "input": "sfn:input",
+        "output": "sfn:output",
+        "error": "sfn:error",
+        "cause": "sfn:cause"
+      }
+    },
+
+    "HistoryEvent": {
+      "@id": "sfn:HistoryEvent",
+      "@context": {
+        "timestamp": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        },
+        "type": "sfn:eventType",
+        "id": "sfn:eventId",
+        "previousEventId": "sfn:previousEventId",
+        "stateEnteredEventDetails": "sfn:stateEnteredEventDetails",
+        "stateExitedEventDetails": "sfn:stateExitedEventDetails",
+        "executionStartedEventDetails": "sfn:executionStartedEventDetails",
+        "executionSucceededEventDetails": "sfn:executionSucceededEventDetails",
+        "executionFailedEventDetails": "sfn:executionFailedEventDetails"
+      }
+    },
+
+    "Activity": {
+      "@id": "sfn:Activity",
+      "@context": {
+        "activityArn": "sfn:activityArn",
+        "name": "schema:name",
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "StateMachineVersion": {
+      "@id": "sfn:StateMachineVersion",
+      "@context": {
+        "stateMachineVersionArn": "sfn:stateMachineVersionArn",
+        "description": "schema:description",
+        "revisionId": "sfn:revisionId",
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "StateMachineAlias": {
+      "@id": "sfn:StateMachineAlias",
+      "@context": {
+        "stateMachineAliasArn": "sfn:stateMachineAliasArn",
+        "name": "schema:name",
+        "description": "schema:description",
+        "creationDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "routingConfiguration": {
+          "@id": "sfn:routingConfiguration",
+          "@container": "@set"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,947 @@
+openapi: 3.1.0
+info:
+  title: Amazon Step Functions API
+  description: >-
+    Amazon Step Functions is a serverless workflow orchestration service that
+    lets you coordinate distributed applications and microservices using visual
+    workflows. This API enables you to create and manage state machines, start
+    and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/
+servers:
+  - url: https://states.{region}.amazonaws.com
+    description: Amazon Step Functions Regional Endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS Region
+tags:
+  - name: State Machines
+    description: Operations for creating, updating, describing, and deleting state machines
+  - name: Executions
+    description: Operations for starting, stopping, describing, and listing executions
+  - name: History
+    description: Operations for retrieving execution history events
+security:
+  - sigv4Auth: []
+paths:
+  /#X-Amz-Target=AWSStepFunctions.CreateStateMachine:
+    post:
+      operationId: createStateMachine
+      summary: Create a state machine
+      description: >-
+        Creates a state machine. A state machine consists of a collection of
+        states that can do work (Task states), make choices (Choice states),
+        and stop an execution with a success or failure (Succeed or Fail states).
+      tags:
+        - State Machines
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-CreateStateMachine'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/CreateStateMachineInput'
+      responses:
+        '200':
+          description: Successfully created state machine
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/CreateStateMachineOutput'
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication failure
+        '403':
+          description: Authorization failure
+        '409':
+          description: State machine already exists
+  /#X-Amz-Target=AWSStepFunctions.DescribeStateMachine:
+    post:
+      operationId: describeStateMachine
+      summary: Describe a state machine
+      description: >-
+        Provides information about a state machine's definition, its IAM role
+        ARN, and configuration. A qualified state machine ARN can refer to a
+        specific version or alias.
+      tags:
+        - State Machines
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-DescribeStateMachine'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - stateMachineArn
+              properties:
+                stateMachineArn:
+                  type: string
+                  description: The ARN of the state machine to describe
+      responses:
+        '200':
+          description: Successfully described state machine
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeStateMachineOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.ListStateMachines:
+    post:
+      operationId: listStateMachines
+      summary: List state machines
+      description: >-
+        Lists the existing state machines. Returns a paginated list of state
+        machine ARNs, names, types, and creation dates.
+      tags:
+        - State Machines
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-ListStateMachines'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+                  description: The maximum number of results to return
+                nextToken:
+                  type: string
+                  description: Pagination token from a previous call
+      responses:
+        '200':
+          description: Successfully listed state machines
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListStateMachinesOutput'
+        '400':
+          description: Invalid request parameters
+  /#X-Amz-Target=AWSStepFunctions.UpdateStateMachine:
+    post:
+      operationId: updateStateMachine
+      summary: Update a state machine
+      description: >-
+        Updates an existing state machine by modifying its definition, roleArn,
+        loggingConfiguration, or tracingConfiguration. Running executions will
+        continue to use the previous definition and role ARN.
+      tags:
+        - State Machines
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-UpdateStateMachine'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/UpdateStateMachineInput'
+      responses:
+        '200':
+          description: Successfully updated state machine
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  updateDate:
+                    type: string
+                    format: date-time
+                    description: The date the state machine was updated
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.DeleteStateMachine:
+    post:
+      operationId: deleteStateMachine
+      summary: Delete a state machine
+      description: >-
+        Deletes a state machine. This is an asynchronous operation. It sets the
+        state machine status to DELETING and begins the deletion process. A
+        qualified state machine ARN can refer to a specific version.
+      tags:
+        - State Machines
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-DeleteStateMachine'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - stateMachineArn
+              properties:
+                stateMachineArn:
+                  type: string
+                  description: The ARN of the state machine to delete
+      responses:
+        '200':
+          description: Successfully initiated state machine deletion
+        '400':
+          description: Invalid request parameters
+  /#X-Amz-Target=AWSStepFunctions.StartExecution:
+    post:
+      operationId: startExecution
+      summary: Start a state machine execution
+      description: >-
+        Starts a state machine execution. A qualified state machine ARN can
+        refer to a specific version or alias. StartExecution is idempotent for
+        STANDARD workflows but not for EXPRESS workflows.
+      tags:
+        - Executions
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-StartExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/StartExecutionInput'
+      responses:
+        '200':
+          description: Successfully started execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/StartExecutionOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.DescribeExecution:
+    post:
+      operationId: describeExecution
+      summary: Describe an execution
+      description: >-
+        Provides information about a state machine execution, such as the state
+        machine associated with the execution, the execution input and output,
+        and relevant execution metadata.
+      tags:
+        - Executions
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-DescribeExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution to describe
+      responses:
+        '200':
+          description: Successfully described execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeExecutionOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+  /#X-Amz-Target=AWSStepFunctions.ListExecutions:
+    post:
+      operationId: listExecutions
+      summary: List executions of a state machine
+      description: >-
+        Lists all executions of a state machine or a Map Run. Returns a
+        paginated list of execution ARNs, names, statuses, and start dates.
+      tags:
+        - Executions
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-ListExecutions'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - stateMachineArn
+              properties:
+                stateMachineArn:
+                  type: string
+                  description: The ARN of the state machine
+                statusFilter:
+                  type: string
+                  description: Filter executions by status
+                  enum:
+                    - RUNNING
+                    - SUCCEEDED
+                    - FAILED
+                    - TIMED_OUT
+                    - ABORTED
+                    - PENDING_REDRIVE
+                maxResults:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+                  description: The maximum number of results to return
+                nextToken:
+                  type: string
+                  description: Pagination token from a previous call
+      responses:
+        '200':
+          description: Successfully listed executions
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListExecutionsOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.StopExecution:
+    post:
+      operationId: stopExecution
+      summary: Stop an execution
+      description: >-
+        Stops an execution. This API action is not supported by EXPRESS state
+        machines. For EXPRESS state machines, use a Map Run to stop an execution.
+      tags:
+        - Executions
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-StopExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution to stop
+                error:
+                  type: string
+                  description: The error code of the failure
+                cause:
+                  type: string
+                  description: A more detailed explanation of the cause of the failure
+      responses:
+        '200':
+          description: Successfully stopped execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  stopDate:
+                    type: string
+                    format: date-time
+                    description: The date the execution was stopped
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+  /#X-Amz-Target=AWSStepFunctions.GetExecutionHistory:
+    post:
+      operationId: getExecutionHistory
+      summary: Get execution history
+      description: >-
+        Returns the history of the specified execution as a list of events.
+        The results are returned in reverse chronological order if nextToken
+        is returned. Events are ordered by the timeStamp field.
+      tags:
+        - History
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target-GetExecutionHistory'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+                - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution
+                maxResults:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+                  description: The maximum number of results to return
+                reverseOrder:
+                  type: boolean
+                  description: Lists events in descending order of their timeStamp
+                nextToken:
+                  type: string
+                  description: Pagination token from a previous call
+                includeExecutionData:
+                  type: boolean
+                  description: Whether to include execution data (input/output) in the response
+      responses:
+        '200':
+          description: Successfully retrieved execution history
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/GetExecutionHistoryOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+components:
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+  parameters:
+    X-Amz-Target-CreateStateMachine:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.CreateStateMachine
+    X-Amz-Target-DescribeStateMachine:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.DescribeStateMachine
+    X-Amz-Target-ListStateMachines:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.ListStateMachines
+    X-Amz-Target-UpdateStateMachine:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.UpdateStateMachine
+    X-Amz-Target-DeleteStateMachine:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.DeleteStateMachine
+    X-Amz-Target-StartExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.StartExecution
+    X-Amz-Target-DescribeExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.DescribeExecution
+    X-Amz-Target-ListExecutions:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.ListExecutions
+    X-Amz-Target-StopExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.StopExecution
+    X-Amz-Target-GetExecutionHistory:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+          - AWSStepFunctions.GetExecutionHistory
+  schemas:
+    CreateStateMachineInput:
+      type: object
+      required:
+        - name
+        - definition
+        - roleArn
+      properties:
+        name:
+          type: string
+          description: The name of the state machine
+          minLength: 1
+          maxLength: 80
+        definition:
+          type: string
+          description: The Amazon States Language definition of the state machine
+        roleArn:
+          type: string
+          description: The ARN of the IAM role to use for this state machine
+        type:
+          type: string
+          description: The type of state machine
+          enum:
+            - STANDARD
+            - EXPRESS
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          $ref: '#/components/schemas/TracingConfiguration'
+        tags:
+          type: array
+          description: Tags to attach to the state machine
+          items:
+            $ref: '#/components/schemas/Tag'
+    CreateStateMachineOutput:
+      type: object
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the created state machine
+        creationDate:
+          type: string
+          format: date-time
+          description: The date the state machine was created
+    DescribeStateMachineOutput:
+      type: object
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine
+        name:
+          type: string
+          description: The name of the state machine
+        status:
+          type: string
+          description: The current status of the state machine
+          enum:
+            - ACTIVE
+            - DELETING
+        definition:
+          type: string
+          description: The Amazon States Language definition of the state machine
+        roleArn:
+          type: string
+          description: The ARN of the IAM role used by the state machine
+        type:
+          type: string
+          description: The type of state machine
+          enum:
+            - STANDARD
+            - EXPRESS
+        creationDate:
+          type: string
+          format: date-time
+          description: The date the state machine was created
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          $ref: '#/components/schemas/TracingConfiguration'
+    ListStateMachinesOutput:
+      type: object
+      properties:
+        stateMachines:
+          type: array
+          description: List of state machines
+          items:
+            $ref: '#/components/schemas/StateMachineListItem'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+    UpdateStateMachineInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine to update
+        definition:
+          type: string
+          description: The Amazon States Language definition of the state machine
+        roleArn:
+          type: string
+          description: The ARN of the IAM role of the state machine
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          $ref: '#/components/schemas/TracingConfiguration'
+    StartExecutionInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine to execute
+        name:
+          type: string
+          description: >-
+            Optional name for the execution. Must be unique for your AWS
+            account, region, and state machine for 90 days.
+          minLength: 1
+          maxLength: 80
+        input:
+          type: string
+          description: >-
+            The string that contains the JSON input data for the execution.
+            Maximum length of 262144 characters.
+        traceHeader:
+          type: string
+          description: Passes the X-Ray trace header for the execution
+    StartExecutionOutput:
+      type: object
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+    DescribeExecutionOutput:
+      type: object
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        stateMachineArn:
+          type: string
+          description: The ARN of the executed state machine
+        name:
+          type: string
+          description: The name of the execution
+        status:
+          type: string
+          description: The current status of the execution
+          enum:
+            - RUNNING
+            - SUCCEEDED
+            - FAILED
+            - TIMED_OUT
+            - ABORTED
+            - PENDING_REDRIVE
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+        stopDate:
+          type: string
+          format: date-time
+          description: The date the execution stopped (if completed)
+        input:
+          type: string
+          description: The JSON input data of the execution
+        output:
+          type: string
+          description: The JSON output data of the execution (if succeeded)
+        error:
+          type: string
+          description: The error code of the failure (if failed)
+        cause:
+          type: string
+          description: A more detailed explanation of the cause of the failure
+    ListExecutionsOutput:
+      type: object
+      properties:
+        executions:
+          type: array
+          description: List of executions
+          items:
+            $ref: '#/components/schemas/ExecutionListItem'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+    GetExecutionHistoryOutput:
+      type: object
+      properties:
+        events:
+          type: array
+          description: The list of events that occurred in the execution
+          items:
+            $ref: '#/components/schemas/HistoryEvent'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+    StateMachineListItem:
+      type: object
+      description: Contains details about a state machine
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine
+        name:
+          type: string
+          description: The name of the state machine
+        type:
+          type: string
+          description: The type of state machine
+          enum:
+            - STANDARD
+            - EXPRESS
+        creationDate:
+          type: string
+          format: date-time
+          description: The date the state machine was created
+    ExecutionListItem:
+      type: object
+      description: Contains details about an execution
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        stateMachineArn:
+          type: string
+          description: The ARN of the executed state machine
+        name:
+          type: string
+          description: The name of the execution
+        status:
+          type: string
+          description: The current status of the execution
+          enum:
+            - RUNNING
+            - SUCCEEDED
+            - FAILED
+            - TIMED_OUT
+            - ABORTED
+            - PENDING_REDRIVE
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+        stopDate:
+          type: string
+          format: date-time
+          description: The date the execution stopped
+    HistoryEvent:
+      type: object
+      description: Contains details about the events of an execution
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: The date and time the event occurred
+        type:
+          type: string
+          description: The type of the event
+          enum:
+            - ActivityFailed
+            - ActivityScheduled
+            - ActivityScheduleFailed
+            - ActivityStarted
+            - ActivitySucceeded
+            - ActivityTimedOut
+            - ChoiceStateEntered
+            - ChoiceStateExited
+            - ExecutionAborted
+            - ExecutionFailed
+            - ExecutionStarted
+            - ExecutionSucceeded
+            - ExecutionTimedOut
+            - FailStateEntered
+            - LambdaFunctionFailed
+            - LambdaFunctionScheduled
+            - LambdaFunctionScheduleFailed
+            - LambdaFunctionStarted
+            - LambdaFunctionStartFailed
+            - LambdaFunctionSucceeded
+            - LambdaFunctionTimedOut
+            - MapIterationAborted
+            - MapIterationFailed
+            - MapIterationStarted
+            - MapIterationSucceeded
+            - MapStateAborted
+            - MapStateEntered
+            - MapStateExited
+            - MapStateFailed
+            - MapStateStarted
+            - MapStateSucceeded
+            - ParallelStateAborted
+            - ParallelStateEntered
+            - ParallelStateExited
+            - ParallelStateFailed
+            - ParallelStateStarted
+            - ParallelStateSucceeded
+            - PassStateEntered
+            - PassStateExited
+            - SucceedStateEntered
+            - SucceedStateExited
+            - TaskFailed
+            - TaskScheduled
+            - TaskStarted
+            - TaskStartFailed
+            - TaskStateAborted
+            - TaskStateEntered
+            - TaskStateExited
+            - TaskSubmitFailed
+            - TaskSubmitted
+            - TaskSucceeded
+            - TaskTimedOut
+            - WaitStateAborted
+            - WaitStateEntered
+            - WaitStateExited
+        id:
+          type: integer
+          description: The id of the event
+        previousEventId:
+          type: integer
+          description: The id of the previous event
+        executionStartedEventDetails:
+          type: object
+          description: Details for ExecutionStarted events
+          properties:
+            input:
+              type: string
+              description: The JSON data input to the execution
+            roleArn:
+              type: string
+              description: The ARN of the IAM role used for the execution
+        executionSucceededEventDetails:
+          type: object
+          description: Details for ExecutionSucceeded events
+          properties:
+            output:
+              type: string
+              description: The JSON data output by the execution
+        executionFailedEventDetails:
+          type: object
+          description: Details for ExecutionFailed events
+          properties:
+            error:
+              type: string
+              description: The error code of the failure
+            cause:
+              type: string
+              description: A more detailed explanation of the cause of the failure
+        stateEnteredEventDetails:
+          type: object
+          description: Details for state entered events
+          properties:
+            name:
+              type: string
+              description: The name of the state
+            input:
+              type: string
+              description: The JSON input to the state
+        stateExitedEventDetails:
+          type: object
+          description: Details for state exited events
+          properties:
+            name:
+              type: string
+              description: The name of the state
+            output:
+              type: string
+              description: The JSON output from the state
+        taskScheduledEventDetails:
+          type: object
+          description: Details for TaskScheduled events
+          properties:
+            resourceType:
+              type: string
+              description: The service name of the resource in the task
+            resource:
+              type: string
+              description: The action of the resource called by the task
+            parameters:
+              type: string
+              description: The JSON data of the resource parameters
+        lambdaFunctionScheduledEventDetails:
+          type: object
+          description: Details for LambdaFunctionScheduled events
+          properties:
+            resource:
+              type: string
+              description: The ARN of the scheduled Lambda function
+            input:
+              type: string
+              description: The JSON data input to the Lambda function
+            timeoutInSeconds:
+              type: integer
+              description: The maximum allowed duration of the Lambda function
+    LoggingConfiguration:
+      type: object
+      description: Logging configuration for a state machine
+      properties:
+        level:
+          type: string
+          description: Defines which category of execution history events are logged
+          enum:
+            - ALL
+            - ERROR
+            - FATAL
+            - 'OFF'
+        includeExecutionData:
+          type: boolean
+          description: Determines whether execution data is included in log messages
+        destinations:
+          type: array
+          description: Array of log destination objects
+          items:
+            type: object
+            properties:
+              cloudWatchLogsLogGroup:
+                type: object
+                properties:
+                  logGroupArn:
+                    type: string
+                    description: The ARN of the CloudWatch log group
+    TracingConfiguration:
+      type: object
+      description: Tracing configuration for a state machine
+      properties:
+        enabled:
+          type: boolean
+          description: When set to true, X-Ray tracing is enabled
+    Tag:
+      type: object
+      description: Describes a resource tag
+      properties:
+        key:
+          type: string
+          description: The key of the tag
+          maxLength: 128
+        value:
+          type: string
+          description: The value of the tag
+          maxLength: 256
+      required:
+        - key

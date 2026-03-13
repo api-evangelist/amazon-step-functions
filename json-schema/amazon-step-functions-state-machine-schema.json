@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/amazon/step-functions/state-machine.json",
+  "title": "Amazon Step Functions State Machine",
+  "description": "Represents an Amazon Step Functions state machine with its associated configuration, definition, and metadata.",
+  "type": "object",
+  "required": ["stateMachineArn", "name", "definition", "roleArn", "type", "creationDate"],
+  "properties": {
+    "stateMachineArn": {
+      "type": "string",
+      "description": "The ARN that identifies the state machine",
+      "pattern": "^arn:aws:states:[a-z0-9-]+:\\d{12}:stateMachine:.+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the state machine",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the state machine",
+      "enum": ["ACTIVE", "DELETING"]
+    },
+    "definition": {
+      "type": "string",
+      "description": "The Amazon States Language definition of the state machine as a JSON string"
+    },
+    "roleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role used by the state machine for executions",
+      "pattern": "^arn:aws:iam::\\d{12}:role/.+$"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the state machine (STANDARD or EXPRESS)",
+      "enum": ["STANDARD", "EXPRESS"]
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date the state machine was created"
+    },
+    "loggingConfiguration": {
+      "$ref": "#/$defs/LoggingConfiguration"
+    },
+    "tracingConfiguration": {
+      "$ref": "#/$defs/TracingConfiguration"
+    },
+    "label": {
+      "type": "string",
+      "description": "A user-defined or auto-generated string that identifies a Map state"
+    },
+    "revisionId": {
+      "type": "string",
+      "description": "The revision identifier for the state machine"
+    },
+    "description": {
+      "type": "string",
+      "description": "A user-defined description of the state machine",
+      "maxLength": 256
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags attached to the state machine",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      }
+    }
+  },
+  "$defs": {
+    "LoggingConfiguration": {
+      "type": "object",
+      "description": "Logging configuration for the state machine",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "Defines which category of execution history events are logged",
+          "enum": ["ALL", "ERROR", "FATAL", "OFF"]
+        },
+        "includeExecutionData": {
+          "type": "boolean",
+          "description": "Determines whether execution data is included in log messages"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Array of objects that describe where logs are sent",
+          "items": {
+            "$ref": "#/$defs/LogDestination"
+          }
+        }
+      }
+    },
+    "LogDestination": {
+      "type": "object",
+      "description": "A log destination configuration",
+      "properties": {
+        "cloudWatchLogsLogGroup": {
+          "type": "object",
+          "description": "CloudWatch Logs log group configuration",
+          "properties": {
+            "logGroupArn": {
+              "type": "string",
+              "description": "The ARN of the CloudWatch Logs log group"
+            }
+          }
+        }
+      }
+    },
+    "TracingConfiguration": {
+      "type": "object",
+      "description": "X-Ray tracing configuration for the state machine",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "When set to true, X-Ray tracing is enabled"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Describes a resource tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the tag",
+          "maxLength": 128
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag",
+          "maxLength": 256
+        }
+      },
+      "required": ["key"]
+    },
+    "StateMachineDefinition": {
+      "type": "object",
+      "description": "The Amazon States Language definition structure",
+      "required": ["StartAt", "States"],
+      "properties": {
+        "Comment": {
+          "type": "string",
+          "description": "A human-readable description of the state machine"
+        },
+        "StartAt": {
+          "type": "string",
+          "description": "The name of the state where execution starts"
+        },
+        "States": {
+          "type": "object",
+          "description": "An object containing a set of states",
+          "additionalProperties": {
+            "$ref": "#/$defs/State"
+          }
+        },
+        "TimeoutSeconds": {
+          "type": "integer",
+          "description": "The maximum number of seconds an execution can run",
+          "minimum": 0
+        },
+        "Version": {
+          "type": "string",
+          "description": "The version of the Amazon States Language"
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "description": "A single state in the state machine",
+      "required": ["Type"],
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The type of the state",
+          "enum": ["Task", "Pass", "Choice", "Wait", "Succeed", "Fail", "Parallel", "Map"]
+        },
+        "Comment": {
+          "type": "string",
+          "description": "A human-readable description of the state"
+        },
+        "InputPath": {
+          "type": ["string", "null"],
+          "description": "A path that selects a portion of the state input"
+        },
+        "OutputPath": {
+          "type": ["string", "null"],
+          "description": "A path that selects a portion of the state output"
+        },
+        "Next": {
+          "type": "string",
+          "description": "The name of the next state to transition to"
+        },
+        "End": {
+          "type": "boolean",
+          "description": "Designates this state as a terminal state"
+        },
+        "Resource": {
+          "type": "string",
+          "description": "The ARN of the resource to invoke (for Task states)"
+        },
+        "Parameters": {
+          "type": "object",
+          "description": "Key-value pairs passed as input to the resource"
+        },
+        "ResultPath": {
+          "type": ["string", "null"],
+          "description": "A path that determines what is sent as input to the next state"
+        },
+        "ResultSelector": {
+          "type": "object",
+          "description": "Key-value pairs to manipulate the result before ResultPath"
+        },
+        "Retry": {
+          "type": "array",
+          "description": "Retry policies for the state",
+          "items": {
+            "$ref": "#/$defs/Retrier"
+          }
+        },
+        "Catch": {
+          "type": "array",
+          "description": "Catch clauses for error handling",
+          "items": {
+            "$ref": "#/$defs/Catcher"
+          }
+        },
+        "Choices": {
+          "type": "array",
+          "description": "Array of choice rules (for Choice states)",
+          "items": {
+            "type": "object"
+          }
+        },
+        "Default": {
+          "type": "string",
+          "description": "The default state for a Choice state"
+        },
+        "Seconds": {
+          "type": "integer",
+          "description": "The number of seconds to wait (for Wait states)"
+        },
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "An absolute time to wait until (for Wait states)"
+        },
+        "Branches": {
+          "type": "array",
+          "description": "Array of parallel branches (for Parallel states)",
+          "items": {
+            "type": "object"
+          }
+        },
+        "Iterator": {
+          "type": "object",
+          "description": "The state machine to process each array element (for Map states)"
+        },
+        "ItemsPath": {
+          "type": "string",
+          "description": "Reference path identifying the array to iterate over (for Map states)"
+        },
+        "MaxConcurrency": {
+          "type": "integer",
+          "description": "Maximum concurrent iterations (for Map states)",
+          "minimum": 0
+        },
+        "Error": {
+          "type": "string",
+          "description": "The error name for a Fail state"
+        },
+        "Cause": {
+          "type": "string",
+          "description": "A description for a Fail state"
+        },
+        "TimeoutSeconds": {
+          "type": "integer",
+          "description": "The maximum time in seconds a Task state can run"
+        },
+        "HeartbeatSeconds": {
+          "type": "integer",
+          "description": "The time between heartbeats for a Task state"
+        }
+      }
+    },
+    "Retrier": {
+      "type": "object",
+      "description": "A retry policy",
+      "required": ["ErrorEquals"],
+      "properties": {
+        "ErrorEquals": {
+          "type": "array",
+          "description": "The error names to match",
+          "items": {
+            "type": "string"
+          }
+        },
+        "IntervalSeconds": {
+          "type": "integer",
+          "description": "The number of seconds before the first retry attempt",
+          "minimum": 1
+        },
+        "MaxAttempts": {
+          "type": "integer",
+          "description": "The maximum number of retry attempts",
+          "minimum": 0
+        },
+        "BackoffRate": {
+          "type": "number",
+          "description": "The multiplier by which the retry interval increases",
+          "minimum": 1.0
+        }
+      }
+    },
+    "Catcher": {
+      "type": "object",
+      "description": "A catch clause for error handling",
+      "required": ["ErrorEquals", "Next"],
+      "properties": {
+        "ErrorEquals": {
+          "type": "array",
+          "description": "The error names to match",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Next": {
+          "type": "string",
+          "description": "The name of the state to transition to"
+        },
+        "ResultPath": {
+          "type": ["string", "null"],
+          "description": "A path that determines what is sent as input to the Next state"
+        }
+      }
+    }
+  }
+}
