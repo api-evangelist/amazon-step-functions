@@ -3,7 +3,7 @@ description: Amazon Step Functions is a serverless workflow orchestration servic
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/step-functions/
 created: '2024-01-15'
-modified: '2026-03-13'
+modified: '2026-03-16'
 apis:
 - name: Amazon Step Functions API
   description: >-
