@@ -22,12 +22,12 @@ servers:
         default: us-east-1
         description: AWS Region
 tags:
-  - name: State Machines
-    description: Operations for creating, updating, describing, and deleting state machines
   - name: Executions
     description: Operations for starting, stopping, describing, and listing executions
   - name: History
     description: Operations for retrieving execution history events
+  - name: State Machines
+    description: Operations for creating, updating, describing, and deleting state machines
 security:
   - sigv4Auth: []
 paths:
