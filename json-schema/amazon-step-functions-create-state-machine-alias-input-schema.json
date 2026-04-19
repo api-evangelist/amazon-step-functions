@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-create-state-machine-alias-input-schema.json",
+  "title": "CreateStateMachineAliasInput",
+  "description": "CreateStateMachineAliasInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AliasDescription"
+        },
+        {
+          "description": "A description for the state machine alias."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CharacterRestrictedName"
+        },
+        {
+          "description": "<p>The name of the state machine alias.</p> <p>To avoid conflict with version ARNs, don't use an integer in the name of the alias.</p>"
+        }
+      ]
+    },
+    "routingConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RoutingConfigurationList"
+        },
+        {
+          "description": "The routing configuration of a state machine alias. The routing configuration shifts execution traffic between two state machine versions. <code>routingConfiguration</code> contains an array of <code>RoutingConfig</code> objects that specify up to two state machine versions. Step Functions then randomly choses which version to run an execution with based on the weight assigned to each <code>RoutingConfig</code>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "routingConfiguration"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-create-state-machine-output-structure.json",
+  "name": "CreateStateMachineOutput",
+  "description": "CreateStateMachineOutput schema from Amazon Step Functions API",
+  "properties": {
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies the created state machine."
+        }
+      ]
+    },
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the state machine is created."
+        }
+      ]
+    },
+    "stateMachineVersionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies the created state machine version. If you do not set the <code>publish</code> parameter to <code>true</code>, this field returns null value."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineArn",
+    "creationDate"
+  ]
+}

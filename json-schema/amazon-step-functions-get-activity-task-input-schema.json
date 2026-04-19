@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-get-activity-task-input-schema.json",
+  "title": "GetActivityTaskInput",
+  "description": "GetActivityTaskInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "activityArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)"
+        }
+      ]
+    },
+    "workerName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history."
+        }
+      ]
+    }
+  },
+  "required": [
+    "activityArn"
+  ]
+}

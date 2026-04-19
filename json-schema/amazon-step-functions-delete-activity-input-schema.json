@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-delete-activity-input-schema.json",
+  "title": "DeleteActivityInput",
+  "description": "DeleteActivityInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "activityArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the activity to delete."
+        }
+      ]
+    }
+  },
+  "required": [
+    "activityArn"
+  ]
+}

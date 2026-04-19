@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-stop-execution-input-structure.json",
+  "name": "StopExecutionInput",
+  "description": "StopExecutionInput schema from Amazon Step Functions API",
+  "properties": {
+    "executionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the execution to stop."
+        }
+      ]
+    },
+    "error": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveError"
+        },
+        {
+          "description": "The error code of the failure."
+        }
+      ]
+    },
+    "cause": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveCause"
+        },
+        {
+          "description": "A more detailed explanation of the cause of the failure."
+        }
+      ]
+    }
+  },
+  "required": [
+    "executionArn"
+  ]
+}

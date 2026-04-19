@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-delete-state-machine-output-schema.json",
+  "title": "DeleteStateMachineOutput",
+  "description": "DeleteStateMachineOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {}
+}

@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-lambda-function-schedule-failed-event-details-structure.json",
+  "name": "LambdaFunctionScheduleFailedEventDetails",
+  "description": "Contains details about a failed Lambda function schedule event that occurred during an execution.",
+  "properties": {
+    "error": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveError"
+        },
+        {
+          "description": "The error code of the failure."
+        }
+      ]
+    },
+    "cause": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveCause"
+        },
+        {
+          "description": "A more detailed explanation of the cause of the failure."
+        }
+      ]
+    }
+  }
+}

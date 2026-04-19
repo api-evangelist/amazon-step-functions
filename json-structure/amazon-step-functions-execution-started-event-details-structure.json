@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-execution-started-event-details-structure.json",
+  "name": "ExecutionStartedEventDetails",
+  "description": "Contains details about the start of the execution.",
+  "properties": {
+    "input": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveData"
+        },
+        {
+          "description": "The JSON data input to the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    },
+    "inputDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventExecutionDataDetails"
+        },
+        {
+          "description": "Contains details about the input for an execution history event."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks."
+        }
+      ]
+    },
+    "stateMachineAliasArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies a state machine alias used for starting the state machine execution."
+        }
+      ]
+    },
+    "stateMachineVersionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies a state machine version used for starting the state machine execution."
+        }
+      ]
+    }
+  }
+}

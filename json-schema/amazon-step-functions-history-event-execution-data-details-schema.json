@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-history-event-execution-data-details-schema.json",
+  "title": "HistoryEventExecutionDataDetails",
+  "description": "Provides details about input or output in an execution history event.",
+  "type": "object",
+  "properties": {
+    "truncated": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/truncated"
+        },
+        {
+          "description": "Indicates whether input or output was truncated in the response. Always <code>false</code> for API calls."
+        }
+      ]
+    }
+  }
+}

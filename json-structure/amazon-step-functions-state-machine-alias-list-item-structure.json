@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-state-machine-alias-list-item-structure.json",
+  "name": "StateMachineAliasListItem",
+  "description": "Contains details about a specific state machine alias.",
+  "properties": {
+    "stateMachineAliasArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LongArn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies a state machine alias. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, <code>stateMachineARN:PROD</code>."
+        }
+      ]
+    },
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The creation date of a state machine alias."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineAliasArn",
+    "creationDate"
+  ]
+}

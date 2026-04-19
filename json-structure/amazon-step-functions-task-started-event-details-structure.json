@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-task-started-event-details-structure.json",
+  "name": "TaskStartedEventDetails",
+  "description": "Contains details about the start of a task during an execution.",
+  "properties": {
+    "resourceType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The service name of the resource in a task state."
+        }
+      ]
+    },
+    "resource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The action of the resource called by a task state."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resourceType",
+    "resource"
+  ]
+}

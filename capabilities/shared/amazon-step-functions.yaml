@@ -1,0 +1,299 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: AWS Step Functions API
+  description: Amazon Step Functions API for cloud resource management.
+  tags:
+  - AWS
+  - Workflow
+  - Orchestration
+  - Serverless
+  - State Machine
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+    AWS_REGION: AWS_REGION
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-step-functions
+    baseUri: https://states.{region}.amazonaws.com
+    description: Amazon Step Functions REST API.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{AWS_SIGNATURE_V4}}'
+      placement: header
+    resources:
+    - name: state-machines
+      path: /state-machines
+      description: State Machines operations
+      operations:
+      - name: createstatemachine
+        method: POST
+        description: CreateStateMachine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: describestatemachine
+        method: POST
+        description: DescribeStateMachine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: liststatemachines
+        method: POST
+        description: ListStateMachines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletestatemachine
+        method: POST
+        description: DeleteStateMachine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatestatemachine
+        method: POST
+        description: UpdateStateMachine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: executions
+      path: /executions
+      description: Executions operations
+      operations:
+      - name: startexecution
+        method: POST
+        description: StartExecution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stopexecution
+        method: POST
+        description: StopExecution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: describeexecution
+        method: POST
+        description: DescribeExecution
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listexecutions
+        method: POST
+        description: ListExecutions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getexecutionhistory
+        method: POST
+        description: GetExecutionHistory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: activities
+      path: /activities
+      description: Activities operations
+      operations:
+      - name: createactivity
+        method: POST
+        description: CreateActivity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteactivity
+        method: POST
+        description: DeleteActivity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: describeactivity
+        method: POST
+        description: DescribeActivity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listactivities
+        method: POST
+        description: ListActivities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getactivitytask
+        method: POST
+        description: GetActivityTask
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: sendtasksuccess
+        method: POST
+        description: SendTaskSuccess
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: sendtaskfailure
+        method: POST
+        description: SendTaskFailure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: sendtaskheartbeat
+        method: POST
+        description: SendTaskHeartbeat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: amazon-step-functions-rest
+    resources:
+    - path: /v1/state-machines
+      name: state-machines
+      description: State Machines operations
+      operations:
+      - method: GET
+        name: list-state-machines
+        description: List State Machines
+        call: amazon-step-functions.createstatemachine
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/executions
+      name: executions
+      description: Executions operations
+      operations:
+      - method: GET
+        name: list-executions
+        description: List Executions
+        call: amazon-step-functions.startexecution
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/activities
+      name: activities
+      description: Activities operations
+      operations:
+      - method: GET
+        name: list-activities
+        description: List Activities
+        call: amazon-step-functions.createactivity
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: amazon-step-functions-mcp
+    transport: http
+    description: MCP server for AI-assisted Amazon Step Functions management.
+    tools:
+    - name: list-state-machines
+      description: List Step Functions state machines
+      hints:
+        readOnly: true
+      call: amazon-stepfunctions.liststatemachines
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-state-machine
+      description: Create a state machine
+      hints:
+        readOnly: false
+        idempotent: false
+      call: amazon-stepfunctions.createstatemachine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-execution
+      description: Start a state machine execution
+      hints:
+        readOnly: false
+        idempotent: false
+      call: amazon-stepfunctions.startexecution
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: describe-execution
+      description: Get execution details
+      hints:
+        readOnly: true
+      call: amazon-stepfunctions.describeexecution
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stop-execution
+      description: Stop a running execution
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-stepfunctions.stopexecution
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-executions
+      description: List executions for a state machine
+      hints:
+        readOnly: true
+      call: amazon-stepfunctions.listexecutions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-execution-history
+      description: Get execution history events
+      hints:
+        readOnly: true
+      call: amazon-stepfunctions.getexecutionhistory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: send-task-success
+      description: Report task success from an activity worker
+      hints:
+        readOnly: false
+        idempotent: false
+      call: amazon-stepfunctions.sendtasksuccess
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-describe-state-machine-input-structure.json",
+  "name": "DescribeStateMachineInput",
+  "description": "DescribeStateMachineInput schema from Amazon Step Functions API",
+  "properties": {
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "<p>The Amazon Resource Name (ARN) of the state machine for which you want the information.</p> <p>If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>"
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineArn"
+  ]
+}

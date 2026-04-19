@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-cloud-watch-events-execution-data-details-structure.json",
+  "name": "CloudWatchEventsExecutionDataDetails",
+  "description": "Provides details about execution input or output.",
+  "properties": {
+    "included": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/includedDetails"
+        },
+        {
+          "description": "Indicates whether input or output was included in the response. Always <code>true</code> for API calls. "
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-execution-status-schema.json",
+  "title": "ExecutionStatus",
+  "description": "ExecutionStatus schema from Amazon Step Functions API",
+  "type": "string",
+  "enum": [
+    "RUNNING",
+    "SUCCEEDED",
+    "FAILED",
+    "TIMED_OUT",
+    "ABORTED"
+  ]
+}

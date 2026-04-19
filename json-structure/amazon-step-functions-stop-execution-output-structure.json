@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-stop-execution-output-structure.json",
+  "name": "StopExecutionOutput",
+  "description": "StopExecutionOutput schema from Amazon Step Functions API",
+  "properties": {
+    "stopDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the execution is stopped."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stopDate"
+  ]
+}

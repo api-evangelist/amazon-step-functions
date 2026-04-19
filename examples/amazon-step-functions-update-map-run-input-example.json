@@ -1,0 +1,6 @@
+{
+  "mapRunArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "maxConcurrency": "example-value",
+  "toleratedFailurePercentage": "example-value",
+  "toleratedFailureCount": "example-value"
+}

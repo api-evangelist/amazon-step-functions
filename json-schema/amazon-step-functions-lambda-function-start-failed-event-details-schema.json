@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-lambda-function-start-failed-event-details-schema.json",
+  "title": "LambdaFunctionStartFailedEventDetails",
+  "description": "Contains details about a lambda function that failed to start during an execution.",
+  "type": "object",
+  "properties": {
+    "error": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveError"
+        },
+        {
+          "description": "The error code of the failure."
+        }
+      ]
+    },
+    "cause": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveCause"
+        },
+        {
+          "description": "A more detailed explanation of the cause of the failure."
+        }
+      ]
+    }
+  }
+}

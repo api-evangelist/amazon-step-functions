@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-map-run-execution-counts-schema.json",
+  "title": "MapRunExecutionCounts",
+  "description": "Contains details about all of the child workflow executions started by a Map Run.",
+  "type": "object",
+  "properties": {
+    "pending": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run, but haven't started executing yet. "
+        }
+      ]
+    },
+    "running": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run and are currently in-progress."
+        }
+      ]
+    },
+    "succeeded": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run and have completed successfully."
+        }
+      ]
+    },
+    "failed": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run, but have failed."
+        }
+      ]
+    },
+    "timedOut": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run and have timed out."
+        }
+      ]
+    },
+    "aborted": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run and were running, but were either stopped by the user or by Step Functions because the Map Run failed. "
+        }
+      ]
+    },
+    "total": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "The total number of child workflow executions that were started by a Map Run."
+        }
+      ]
+    },
+    "resultsWritten": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedLong"
+        },
+        {
+          "description": "Returns the count of child workflow executions whose results were written by <code>ResultWriter</code>. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html\">ResultWriter</a> in the <i>Step Functions Developer Guide</i>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "pending",
+    "running",
+    "succeeded",
+    "failed",
+    "timedOut",
+    "aborted",
+    "total",
+    "resultsWritten"
+  ]
+}

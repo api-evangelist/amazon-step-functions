@@ -1,0 +1,8 @@
+{
+  "stateMachineAliasArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "name": "MyResource",
+  "description": "example-value",
+  "routingConfiguration": "example-value",
+  "creationDate": "example-value",
+  "updateDate": "example-value"
+}

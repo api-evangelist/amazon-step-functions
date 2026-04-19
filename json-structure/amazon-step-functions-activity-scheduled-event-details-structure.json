@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-activity-scheduled-event-details-structure.json",
+  "name": "ActivityScheduledEventDetails",
+  "description": "Contains details about an activity scheduled during an execution.",
+  "properties": {
+    "resource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the scheduled activity."
+        }
+      ]
+    },
+    "input": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveData"
+        },
+        {
+          "description": "The JSON data input to the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    },
+    "inputDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventExecutionDataDetails"
+        },
+        {
+          "description": "Contains details about the input for an execution history event."
+        }
+      ]
+    },
+    "timeoutInSeconds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimeoutInSeconds"
+        },
+        {
+          "description": "The maximum allowed duration of the activity task."
+        }
+      ]
+    },
+    "heartbeatInSeconds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimeoutInSeconds"
+        },
+        {
+          "description": "The maximum allowed duration between two heartbeats for the activity task."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resource"
+  ]
+}

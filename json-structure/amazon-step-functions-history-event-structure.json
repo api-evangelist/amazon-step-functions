@@ -1,0 +1,282 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-history-event-structure.json",
+  "name": "HistoryEvent",
+  "description": "Contains details about the events of an execution.",
+  "properties": {
+    "timestamp": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date and time the event occurred."
+        }
+      ]
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventType"
+        },
+        {
+          "description": "The type of the event."
+        }
+      ]
+    },
+    "id": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventId"
+        },
+        {
+          "description": "The id of the event. Events are numbered sequentially, starting at one."
+        }
+      ]
+    },
+    "previousEventId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EventId"
+        },
+        {
+          "description": "The id of the previous event."
+        }
+      ]
+    },
+    "activityFailedEventDetails": {
+      "$ref": "#/components/schemas/ActivityFailedEventDetails"
+    },
+    "activityScheduleFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ActivityScheduleFailedEventDetails"
+        },
+        {
+          "description": "Contains details about an activity schedule event that failed during an execution."
+        }
+      ]
+    },
+    "activityScheduledEventDetails": {
+      "$ref": "#/components/schemas/ActivityScheduledEventDetails"
+    },
+    "activityStartedEventDetails": {
+      "$ref": "#/components/schemas/ActivityStartedEventDetails"
+    },
+    "activitySucceededEventDetails": {
+      "$ref": "#/components/schemas/ActivitySucceededEventDetails"
+    },
+    "activityTimedOutEventDetails": {
+      "$ref": "#/components/schemas/ActivityTimedOutEventDetails"
+    },
+    "taskFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskFailedEventDetails"
+        },
+        {
+          "description": "Contains details about the failure of a task."
+        }
+      ]
+    },
+    "taskScheduledEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskScheduledEventDetails"
+        },
+        {
+          "description": "Contains details about a task that was scheduled."
+        }
+      ]
+    },
+    "taskStartFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskStartFailedEventDetails"
+        },
+        {
+          "description": "Contains details about a task that failed to start."
+        }
+      ]
+    },
+    "taskStartedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskStartedEventDetails"
+        },
+        {
+          "description": "Contains details about a task that was started."
+        }
+      ]
+    },
+    "taskSubmitFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskSubmitFailedEventDetails"
+        },
+        {
+          "description": "Contains details about a task that where the submit failed."
+        }
+      ]
+    },
+    "taskSubmittedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskSubmittedEventDetails"
+        },
+        {
+          "description": "Contains details about a submitted task."
+        }
+      ]
+    },
+    "taskSucceededEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskSucceededEventDetails"
+        },
+        {
+          "description": "Contains details about a task that succeeded."
+        }
+      ]
+    },
+    "taskTimedOutEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskTimedOutEventDetails"
+        },
+        {
+          "description": "Contains details about a task that timed out."
+        }
+      ]
+    },
+    "executionFailedEventDetails": {
+      "$ref": "#/components/schemas/ExecutionFailedEventDetails"
+    },
+    "executionStartedEventDetails": {
+      "$ref": "#/components/schemas/ExecutionStartedEventDetails"
+    },
+    "executionSucceededEventDetails": {
+      "$ref": "#/components/schemas/ExecutionSucceededEventDetails"
+    },
+    "executionAbortedEventDetails": {
+      "$ref": "#/components/schemas/ExecutionAbortedEventDetails"
+    },
+    "executionTimedOutEventDetails": {
+      "$ref": "#/components/schemas/ExecutionTimedOutEventDetails"
+    },
+    "mapStateStartedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapStateStartedEventDetails"
+        },
+        {
+          "description": "Contains details about Map state that was started."
+        }
+      ]
+    },
+    "mapIterationStartedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapIterationEventDetails"
+        },
+        {
+          "description": "Contains details about an iteration of a Map state that was started."
+        }
+      ]
+    },
+    "mapIterationSucceededEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapIterationEventDetails"
+        },
+        {
+          "description": "Contains details about an iteration of a Map state that succeeded."
+        }
+      ]
+    },
+    "mapIterationFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapIterationEventDetails"
+        },
+        {
+          "description": "Contains details about an iteration of a Map state that failed."
+        }
+      ]
+    },
+    "mapIterationAbortedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapIterationEventDetails"
+        },
+        {
+          "description": "Contains details about an iteration of a Map state that was aborted."
+        }
+      ]
+    },
+    "lambdaFunctionFailedEventDetails": {
+      "$ref": "#/components/schemas/LambdaFunctionFailedEventDetails"
+    },
+    "lambdaFunctionScheduleFailedEventDetails": {
+      "$ref": "#/components/schemas/LambdaFunctionScheduleFailedEventDetails"
+    },
+    "lambdaFunctionScheduledEventDetails": {
+      "$ref": "#/components/schemas/LambdaFunctionScheduledEventDetails"
+    },
+    "lambdaFunctionStartFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LambdaFunctionStartFailedEventDetails"
+        },
+        {
+          "description": "Contains details about a lambda function that failed to start during an execution."
+        }
+      ]
+    },
+    "lambdaFunctionSucceededEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LambdaFunctionSucceededEventDetails"
+        },
+        {
+          "description": "Contains details about a Lambda function that terminated successfully during an execution."
+        }
+      ]
+    },
+    "lambdaFunctionTimedOutEventDetails": {
+      "$ref": "#/components/schemas/LambdaFunctionTimedOutEventDetails"
+    },
+    "stateEnteredEventDetails": {
+      "$ref": "#/components/schemas/StateEnteredEventDetails"
+    },
+    "stateExitedEventDetails": {
+      "$ref": "#/components/schemas/StateExitedEventDetails"
+    },
+    "mapRunStartedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunStartedEventDetails"
+        },
+        {
+          "description": "Contains details, such as <code>mapRunArn</code>, and the start date and time of a Map Run. <code>mapRunArn</code> is the Amazon Resource Name (ARN) of the Map Run that was started."
+        }
+      ]
+    },
+    "mapRunFailedEventDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunFailedEventDetails"
+        },
+        {
+          "description": "Contains error and cause details about a Map Run that failed."
+        }
+      ]
+    }
+  },
+  "required": [
+    "timestamp",
+    "type",
+    "id"
+  ]
+}

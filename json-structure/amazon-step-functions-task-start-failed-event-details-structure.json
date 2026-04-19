@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-task-start-failed-event-details-structure.json",
+  "name": "TaskStartFailedEventDetails",
+  "description": "Contains details about a task that failed to start during an execution.",
+  "properties": {
+    "resourceType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The service name of the resource in a task state."
+        }
+      ]
+    },
+    "resource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The action of the resource called by a task state."
+        }
+      ]
+    },
+    "error": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveError"
+        },
+        {
+          "description": "The error code of the failure."
+        }
+      ]
+    },
+    "cause": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveCause"
+        },
+        {
+          "description": "A more detailed explanation of the cause of the failure."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resourceType",
+    "resource"
+  ]
+}

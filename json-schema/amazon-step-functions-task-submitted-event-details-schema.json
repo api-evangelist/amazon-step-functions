@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-task-submitted-event-details-schema.json",
+  "title": "TaskSubmittedEventDetails",
+  "description": "Contains details about a task submitted to a resource .",
+  "type": "object",
+  "properties": {
+    "resourceType": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The service name of the resource in a task state."
+        }
+      ]
+    },
+    "resource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The action of the resource called by a task state."
+        }
+      ]
+    },
+    "output": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveData"
+        },
+        {
+          "description": "The response from a resource when a task has started. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    },
+    "outputDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventExecutionDataDetails"
+        },
+        {
+          "description": "Contains details about the output of an execution history event."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resourceType",
+    "resource"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-send-task-failure-output-structure.json",
+  "name": "SendTaskFailureOutput",
+  "description": "SendTaskFailureOutput schema from Amazon Step Functions API",
+  "properties": {}
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-describe-state-machine-output-schema.json",
+  "title": "DescribeStateMachineOutput",
+  "description": "DescribeStateMachineOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p> <p>If you specified a state machine version ARN in your request, the API returns the version ARN. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>"
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>\" # % \\ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>"
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateMachineStatus"
+        },
+        {
+          "description": "The current status of the state machine."
+        }
+      ]
+    },
+    "definition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Definition"
+        },
+        {
+          "description": "The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to Amazon Web Services resources.)"
+        }
+      ]
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateMachineType"
+        },
+        {
+          "description": "The <code>type</code> of the state machine (<code>STANDARD</code> or <code>EXPRESS</code>)."
+        }
+      ]
+    },
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "<p>The date the state machine is created.</p> <p>For a state machine version, <code>creationDate</code> is the date the version was created.</p>"
+        }
+      ]
+    },
+    "loggingConfiguration": {
+      "$ref": "#/components/schemas/LoggingConfiguration"
+    },
+    "tracingConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TracingConfiguration"
+        },
+        {
+          "description": "Selects whether X-Ray tracing is enabled."
+        }
+      ]
+    },
+    "label": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunLabel"
+        },
+        {
+          "description": "A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN."
+        }
+      ]
+    },
+    "revisionId": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RevisionId"
+        },
+        {
+          "description": "<p>The revision identifier for the state machine.</p> <p>Use the <code>revisionId</code> parameter to compare between versions of a state machine configuration used for executions without performing a diff of the properties, such as <code>definition</code> and <code>roleArn</code>.</p>"
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VersionDescription"
+        },
+        {
+          "description": "The description of the state machine version."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineArn",
+    "name",
+    "definition",
+    "roleArn",
+    "type",
+    "creationDate"
+  ]
+}

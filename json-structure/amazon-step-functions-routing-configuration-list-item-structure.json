@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-routing-configuration-list-item-structure.json",
+  "name": "RoutingConfigurationListItem",
+  "description": "Contains details about the routing configuration of a state machine alias. In a routing configuration, you define an array of objects that specify up to two state machine versions. You also specify the percentage of traffic to be routed to each version.",
+  "properties": {
+    "stateMachineVersionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "<p>The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.</p> <p>If you specify the ARN of a second version, it must belong to the same state machine as the first version.</p>"
+        }
+      ]
+    },
+    "weight": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VersionWeight"
+        },
+        {
+          "description": "The percentage of traffic you want to route to the second state machine version. The sum of the weights in the routing configuration must be equal to 100."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineVersionArn",
+    "weight"
+  ]
+}

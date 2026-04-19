@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-map-run-list-item-structure.json",
+  "name": "MapRunListItem",
+  "description": "Contains details about a specific Map Run.",
+  "properties": {
+    "executionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The <code>executionArn</code> of the execution from which the Map Run was started."
+        }
+      ]
+    },
+    "mapRunArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LongArn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the Map Run."
+        }
+      ]
+    },
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the executed state machine."
+        }
+      ]
+    },
+    "startDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date on which the Map Run started."
+        }
+      ]
+    },
+    "stopDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date on which the Map Run stopped."
+        }
+      ]
+    }
+  },
+  "required": [
+    "executionArn",
+    "mapRunArn",
+    "stateMachineArn",
+    "startDate"
+  ]
+}

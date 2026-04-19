@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-update-state-machine-input-structure.json",
+  "name": "UpdateStateMachineInput",
+  "description": "UpdateStateMachineInput schema from Amazon Step Functions API",
+  "properties": {
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the state machine."
+        }
+      ]
+    },
+    "definition": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Definition"
+        },
+        {
+          "description": "The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>."
+        }
+      ]
+    },
+    "roleArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the IAM role of the state machine."
+        }
+      ]
+    },
+    "loggingConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LoggingConfiguration"
+        },
+        {
+          "description": "Use the <code>LoggingConfiguration</code> data type to set CloudWatch Logs options."
+        }
+      ]
+    },
+    "tracingConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TracingConfiguration"
+        },
+        {
+          "description": "Selects whether X-Ray tracing is enabled."
+        }
+      ]
+    },
+    "publish": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Publish"
+        },
+        {
+          "description": "Specifies whether the state machine version is published. The default is <code>false</code>. To publish a version after updating the state machine, set <code>publish</code> to <code>true</code>."
+        }
+      ]
+    },
+    "versionDescription": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/VersionDescription"
+        },
+        {
+          "description": "<p>An optional description of the state machine version to publish.</p> <p>You can only specify the <code>versionDescription</code> parameter if you've set <code>publish</code> to <code>true</code>.</p>"
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineArn"
+  ]
+}

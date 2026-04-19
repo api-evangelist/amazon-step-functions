@@ -1,0 +1,7 @@
+{
+  "input": "example-value",
+  "inputDetails": "example-value",
+  "roleArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "stateMachineAliasArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "stateMachineVersionArn": "arn:aws:service:us-east-1:123456789012:resource/example"
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-list-state-machine-aliases-output-schema.json",
+  "title": "ListStateMachineAliasesOutput",
+  "description": "ListStateMachineAliasesOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "stateMachineAliases": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateMachineAliasList"
+        },
+        {
+          "description": "Aliases for the state machine."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PageToken"
+        },
+        {
+          "description": "If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineAliases"
+  ]
+}

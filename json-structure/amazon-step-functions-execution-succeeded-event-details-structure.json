@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-execution-succeeded-event-details-structure.json",
+  "name": "ExecutionSucceededEventDetails",
+  "description": "Contains details about the successful termination of the execution.",
+  "properties": {
+    "output": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveData"
+        },
+        {
+          "description": "The JSON data output by the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    },
+    "outputDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventExecutionDataDetails"
+        },
+        {
+          "description": "Contains details about the output of an execution history event."
+        }
+      ]
+    }
+  }
+}

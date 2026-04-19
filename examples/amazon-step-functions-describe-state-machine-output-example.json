@@ -1,0 +1,14 @@
+{
+  "stateMachineArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "name": "MyResource",
+  "status": "Active",
+  "definition": "example-value",
+  "roleArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "type": "example-value",
+  "creationDate": "example-value",
+  "loggingConfiguration": "example-value",
+  "tracingConfiguration": "example-value",
+  "label": "example-value",
+  "revisionId": "example-value",
+  "description": "example-value"
+}

@@ -1,0 +1,7 @@
+{
+  "stateMachineArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "statusFilter": "Active",
+  "maxResults": "example-value",
+  "nextToken": "example-value",
+  "mapRunArn": "arn:aws:service:us-east-1:123456789012:resource/example"
+}

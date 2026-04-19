@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-delete-state-machine-input-schema.json",
+  "title": "DeleteStateMachineInput",
+  "description": "DeleteStateMachineInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "stateMachineArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the state machine to delete."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineArn"
+  ]
+}

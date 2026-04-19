@@ -1,113 +1,602 @@
 {
   "@context": {
     "@version": 1.1,
-    "sfn": "https://docs.aws.amazon.com/step-functions/latest/apireference/",
+    "aws": "https://amazonaws.com/schema/",
     "schema": "https://schema.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dcterms": "http://purl.org/dc/terms/",
-
-    "StateMachine": {
-      "@id": "sfn:StateMachine",
-      "@context": {
-        "stateMachineArn": "sfn:stateMachineArn",
-        "name": "schema:name",
-        "status": "sfn:status",
-        "definition": "sfn:definition",
-        "roleArn": "sfn:roleArn",
-        "type": "sfn:type",
-        "creationDate": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "loggingConfiguration": "sfn:loggingConfiguration",
-        "tracingConfiguration": "sfn:tracingConfiguration",
-        "tags": {
-          "@id": "sfn:tags",
-          "@container": "@set"
-        }
-      }
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DescribeMapRunInput": "aws:DescribeMapRunInput",
+    "DescribeMapRunOutput": "aws:DescribeMapRunOutput",
+    "StartExecutionOutput": "aws:StartExecutionOutput",
+    "ActivitySucceededEventDetails": "aws:ActivitySucceededEventDetails",
+    "LambdaFunctionTimedOutEventDetails": "aws:LambdaFunctionTimedOutEventDetails",
+    "LambdaFunctionFailedEventDetails": "aws:LambdaFunctionFailedEventDetails",
+    "CreateStateMachineOutput": "aws:CreateStateMachineOutput",
+    "ExecutionAbortedEventDetails": "aws:ExecutionAbortedEventDetails",
+    "ListStateMachineAliasesInput": "aws:ListStateMachineAliasesInput",
+    "ListStateMachineAliasesOutput": "aws:ListStateMachineAliasesOutput",
+    "TaskStartedEventDetails": "aws:TaskStartedEventDetails",
+    "StopExecutionOutput": "aws:StopExecutionOutput",
+    "DeleteStateMachineAliasInput": "aws:DeleteStateMachineAliasInput",
+    "LambdaFunctionScheduledEventDetails": "aws:LambdaFunctionScheduledEventDetails",
+    "StateExitedEventDetails": "aws:StateExitedEventDetails",
+    "UpdateMapRunOutput": "aws:UpdateMapRunOutput",
+    "DeleteStateMachineVersionInput": "aws:DeleteStateMachineVersionInput",
+    "StartSyncExecutionInput": "aws:StartSyncExecutionInput",
+    "StartExecutionInput": "aws:StartExecutionInput",
+    "DescribeActivityOutput": "aws:DescribeActivityOutput",
+    "MapRunFailedEventDetails": "aws:MapRunFailedEventDetails",
+    "DescribeStateMachineAliasOutput": "aws:DescribeStateMachineAliasOutput",
+    "DeleteActivityOutput": "aws:DeleteActivityOutput",
+    "StateMachineVersionListItem": "aws:StateMachineVersionListItem",
+    "LoggingConfiguration": "aws:LoggingConfiguration",
+    "ActivityFailedEventDetails": "aws:ActivityFailedEventDetails",
+    "GetExecutionHistoryInput": "aws:GetExecutionHistoryInput",
+    "StartSyncExecutionOutput": "aws:StartSyncExecutionOutput",
+    "SendTaskHeartbeatInput": "aws:SendTaskHeartbeatInput",
+    "MapIterationEventDetails": "aws:MapIterationEventDetails",
+    "SendTaskSuccessInput": "aws:SendTaskSuccessInput",
+    "TaskCredentials": "aws:TaskCredentials",
+    "CloudWatchEventsExecutionDataDetails": "aws:CloudWatchEventsExecutionDataDetails",
+    "RoutingConfigurationListItem": "aws:RoutingConfigurationListItem",
+    "GetActivityTaskInput": "aws:GetActivityTaskInput",
+    "ExecutionSucceededEventDetails": "aws:ExecutionSucceededEventDetails",
+    "BillingDetails": "aws:BillingDetails",
+    "CreateActivityInput": "aws:CreateActivityInput",
+    "DescribeExecutionInput": "aws:DescribeExecutionInput",
+    "ListActivitiesOutput": "aws:ListActivitiesOutput",
+    "ActivityScheduleFailedEventDetails": "aws:ActivityScheduleFailedEventDetails",
+    "DeleteStateMachineAliasOutput": "aws:DeleteStateMachineAliasOutput",
+    "LogDestination": "aws:LogDestination",
+    "SendTaskSuccessOutput": "aws:SendTaskSuccessOutput",
+    "TaskScheduledEventDetails": "aws:TaskScheduledEventDetails",
+    "PublishStateMachineVersionOutput": "aws:PublishStateMachineVersionOutput",
+    "LambdaFunctionStartFailedEventDetails": "aws:LambdaFunctionStartFailedEventDetails",
+    "ListStateMachineVersionsInput": "aws:ListStateMachineVersionsInput",
+    "Amazon Step Functions State Machine": "aws:Amazon Step Functions State Machine",
+    "ExecutionFailedEventDetails": "aws:ExecutionFailedEventDetails",
+    "MapRunItemCounts": "aws:MapRunItemCounts",
+    "SendTaskHeartbeatOutput": "aws:SendTaskHeartbeatOutput",
+    "DescribeStateMachineInput": "aws:DescribeStateMachineInput",
+    "TaskTimedOutEventDetails": "aws:TaskTimedOutEventDetails",
+    "DeleteActivityInput": "aws:DeleteActivityInput",
+    "ListTagsForResourceInput": "aws:ListTagsForResourceInput",
+    "UpdateStateMachineAliasOutput": "aws:UpdateStateMachineAliasOutput",
+    "MapRunStartedEventDetails": "aws:MapRunStartedEventDetails",
+    "MapStateStartedEventDetails": "aws:MapStateStartedEventDetails",
+    "ListActivitiesInput": "aws:ListActivitiesInput",
+    "TaskSubmitFailedEventDetails": "aws:TaskSubmitFailedEventDetails",
+    "UpdateStateMachineInput": "aws:UpdateStateMachineInput",
+    "DeleteStateMachineVersionOutput": "aws:DeleteStateMachineVersionOutput",
+    "TaskStartFailedEventDetails": "aws:TaskStartFailedEventDetails",
+    "TaskFailedEventDetails": "aws:TaskFailedEventDetails",
+    "ListExecutionsOutput": "aws:ListExecutionsOutput",
+    "DescribeActivityInput": "aws:DescribeActivityInput",
+    "UntagResourceInput": "aws:UntagResourceInput",
+    "ExecutionTimedOutEventDetails": "aws:ExecutionTimedOutEventDetails",
+    "PublishStateMachineVersionInput": "aws:PublishStateMachineVersionInput",
+    "ActivityListItem": "aws:ActivityListItem",
+    "CreateStateMachineInput": "aws:CreateStateMachineInput",
+    "StopExecutionInput": "aws:StopExecutionInput",
+    "ListMapRunsOutput": "aws:ListMapRunsOutput",
+    "TaskSubmittedEventDetails": "aws:TaskSubmittedEventDetails",
+    "CreateStateMachineAliasInput": "aws:CreateStateMachineAliasInput",
+    "CreateActivityOutput": "aws:CreateActivityOutput",
+    "MapRunExecutionCounts": "aws:MapRunExecutionCounts",
+    "TaskSucceededEventDetails": "aws:TaskSucceededEventDetails",
+    "DescribeExecutionOutput": "aws:DescribeExecutionOutput",
+    "HistoryEvent": "aws:HistoryEvent",
+    "DeleteStateMachineInput": "aws:DeleteStateMachineInput",
+    "ListStateMachinesInput": "aws:ListStateMachinesInput",
+    "ExecutionStartedEventDetails": "aws:ExecutionStartedEventDetails",
+    "StateEnteredEventDetails": "aws:StateEnteredEventDetails",
+    "StateMachineListItem": "aws:StateMachineListItem",
+    "StateMachineAliasListItem": "aws:StateMachineAliasListItem",
+    "DescribeStateMachineAliasInput": "aws:DescribeStateMachineAliasInput",
+    "DescribeStateMachineOutput": "aws:DescribeStateMachineOutput",
+    "TagResourceOutput": "aws:TagResourceOutput",
+    "UpdateMapRunInput": "aws:UpdateMapRunInput",
+    "ActivityTimedOutEventDetails": "aws:ActivityTimedOutEventDetails",
+    "DeleteStateMachineOutput": "aws:DeleteStateMachineOutput",
+    "ListStateMachinesOutput": "aws:ListStateMachinesOutput",
+    "ListStateMachineVersionsOutput": "aws:ListStateMachineVersionsOutput",
+    "SendTaskFailureInput": "aws:SendTaskFailureInput",
+    "ListExecutionsInput": "aws:ListExecutionsInput",
+    "CloudWatchLogsLogGroup": "aws:CloudWatchLogsLogGroup",
+    "LambdaFunctionSucceededEventDetails": "aws:LambdaFunctionSucceededEventDetails",
+    "TracingConfiguration": "aws:TracingConfiguration",
+    "TagResourceInput": "aws:TagResourceInput",
+    "ListMapRunsInput": "aws:ListMapRunsInput",
+    "MapRunListItem": "aws:MapRunListItem",
+    "GetExecutionHistoryOutput": "aws:GetExecutionHistoryOutput",
+    "ExecutionListItem": "aws:ExecutionListItem",
+    "Tag": "aws:Tag",
+    "GetActivityTaskOutput": "aws:GetActivityTaskOutput",
+    "DescribeStateMachineForExecutionInput": "aws:DescribeStateMachineForExecutionInput",
+    "UpdateStateMachineAliasInput": "aws:UpdateStateMachineAliasInput",
+    "HistoryEventExecutionDataDetails": "aws:HistoryEventExecutionDataDetails",
+    "LambdaFunctionScheduleFailedEventDetails": "aws:LambdaFunctionScheduleFailedEventDetails",
+    "UpdateStateMachineOutput": "aws:UpdateStateMachineOutput",
+    "CreateStateMachineAliasOutput": "aws:CreateStateMachineAliasOutput",
+    "ListTagsForResourceOutput": "aws:ListTagsForResourceOutput",
+    "ActivityStartedEventDetails": "aws:ActivityStartedEventDetails",
+    "DescribeStateMachineForExecutionOutput": "aws:DescribeStateMachineForExecutionOutput",
+    "ActivityScheduledEventDetails": "aws:ActivityScheduledEventDetails",
+    "UntagResourceOutput": "aws:UntagResourceOutput",
+    "SendTaskFailureOutput": "aws:SendTaskFailureOutput",
+    "mapRunArn": {
+      "@id": "aws:mapRunArn",
+      "@type": "xsd:string"
     },
-
-    "Execution": {
-      "@id": "sfn:Execution",
-      "@context": {
-        "executionArn": "sfn:executionArn",
-        "stateMachineArn": "sfn:stateMachineArn",
-        "name": "schema:name",
-        "status": "sfn:status",
-        "startDate": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "stopDate": {
-          "@id": "sfn:stopDate",
-          "@type": "xsd:dateTime"
-        },
-        "input": "sfn:input",
-        "output": "sfn:output",
-        "error": "sfn:error",
-        "cause": "sfn:cause"
-      }
+    "executionArn": {
+      "@id": "aws:executionArn",
+      "@type": "xsd:string"
     },
-
-    "HistoryEvent": {
-      "@id": "sfn:HistoryEvent",
-      "@context": {
-        "timestamp": {
-          "@id": "dcterms:date",
-          "@type": "xsd:dateTime"
-        },
-        "type": "sfn:eventType",
-        "id": "sfn:eventId",
-        "previousEventId": "sfn:previousEventId",
-        "stateEnteredEventDetails": "sfn:stateEnteredEventDetails",
-        "stateExitedEventDetails": "sfn:stateExitedEventDetails",
-        "executionStartedEventDetails": "sfn:executionStartedEventDetails",
-        "executionSucceededEventDetails": "sfn:executionSucceededEventDetails",
-        "executionFailedEventDetails": "sfn:executionFailedEventDetails"
-      }
+    "status": {
+      "@id": "aws:status",
+      "@type": "xsd:string"
     },
-
-    "Activity": {
-      "@id": "sfn:Activity",
-      "@context": {
-        "activityArn": "sfn:activityArn",
-        "name": "schema:name",
-        "creationDate": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "startDate": {
+      "@id": "aws:startDate",
+      "@type": "xsd:string"
     },
-
-    "StateMachineVersion": {
-      "@id": "sfn:StateMachineVersion",
-      "@context": {
-        "stateMachineVersionArn": "sfn:stateMachineVersionArn",
-        "description": "schema:description",
-        "revisionId": "sfn:revisionId",
-        "creationDate": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "stopDate": {
+      "@id": "aws:stopDate",
+      "@type": "xsd:string"
     },
-
-    "StateMachineAlias": {
-      "@id": "sfn:StateMachineAlias",
-      "@context": {
-        "stateMachineAliasArn": "sfn:stateMachineAliasArn",
-        "name": "schema:name",
-        "description": "schema:description",
-        "creationDate": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "routingConfiguration": {
-          "@id": "sfn:routingConfiguration",
-          "@container": "@set"
-        }
-      }
+    "maxConcurrency": {
+      "@id": "aws:maxConcurrency",
+      "@type": "xsd:string"
+    },
+    "toleratedFailurePercentage": {
+      "@id": "aws:toleratedFailurePercentage",
+      "@type": "xsd:string"
+    },
+    "toleratedFailureCount": {
+      "@id": "aws:toleratedFailureCount",
+      "@type": "xsd:string"
+    },
+    "itemCounts": {
+      "@id": "aws:itemCounts",
+      "@type": "xsd:string"
+    },
+    "executionCounts": {
+      "@id": "aws:executionCounts",
+      "@type": "xsd:string"
+    },
+    "output": {
+      "@id": "aws:output",
+      "@type": "xsd:string"
+    },
+    "outputDetails": {
+      "@id": "aws:outputDetails",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "aws:error",
+      "@type": "xsd:string"
+    },
+    "cause": {
+      "@id": "aws:cause",
+      "@type": "xsd:string"
+    },
+    "stateMachineArn": {
+      "@id": "aws:stateMachineArn",
+      "@type": "xsd:string"
+    },
+    "creationDate": {
+      "@id": "aws:creationDate",
+      "@type": "xsd:string"
+    },
+    "stateMachineVersionArn": {
+      "@id": "aws:stateMachineVersionArn",
+      "@type": "xsd:string"
+    },
+    "nextToken": {
+      "@id": "aws:nextToken",
+      "@type": "xsd:string"
+    },
+    "maxResults": {
+      "@id": "aws:maxResults",
+      "@type": "xsd:string"
+    },
+    "stateMachineAliases": {
+      "@id": "aws:stateMachineAliases",
+      "@type": "xsd:string"
+    },
+    "resourceType": {
+      "@id": "aws:resourceType",
+      "@type": "xsd:string"
+    },
+    "resource": {
+      "@id": "aws:resource",
+      "@type": "xsd:string"
+    },
+    "stateMachineAliasArn": {
+      "@id": "aws:stateMachineAliasArn",
+      "@type": "xsd:string"
+    },
+    "input": {
+      "@id": "aws:input",
+      "@type": "xsd:string"
+    },
+    "inputDetails": {
+      "@id": "aws:inputDetails",
+      "@type": "xsd:string"
+    },
+    "timeoutInSeconds": {
+      "@id": "aws:timeoutInSeconds",
+      "@type": "xsd:string"
+    },
+    "taskCredentials": {
+      "@id": "aws:taskCredentials",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "traceHeader": {
+      "@id": "aws:traceHeader",
+      "@type": "xsd:string"
+    },
+    "activityArn": {
+      "@id": "aws:activityArn",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "routingConfiguration": {
+      "@id": "aws:routingConfiguration",
+      "@type": "xsd:string"
+    },
+    "updateDate": {
+      "@id": "aws:updateDate",
+      "@type": "xsd:string"
+    },
+    "level": {
+      "@id": "aws:level",
+      "@type": "xsd:string"
+    },
+    "includeExecutionData": {
+      "@id": "aws:includeExecutionData",
+      "@type": "xsd:string"
+    },
+    "destinations": {
+      "@id": "aws:destinations",
+      "@type": "xsd:string"
+    },
+    "reverseOrder": {
+      "@id": "aws:reverseOrder",
+      "@type": "xsd:string"
+    },
+    "billingDetails": {
+      "@id": "aws:billingDetails",
+      "@type": "xsd:string"
+    },
+    "taskToken": {
+      "@id": "aws:taskToken",
+      "@type": "xsd:string"
+    },
+    "index": {
+      "@id": "aws:index",
+      "@type": "xsd:string"
+    },
+    "roleArn": {
+      "@id": "aws:roleArn",
+      "@type": "xsd:string"
+    },
+    "included": {
+      "@id": "aws:included",
+      "@type": "xsd:string"
+    },
+    "weight": {
+      "@id": "aws:weight",
+      "@type": "xsd:string"
+    },
+    "workerName": {
+      "@id": "aws:workerName",
+      "@type": "xsd:string"
+    },
+    "billedMemoryUsedInMB": {
+      "@id": "aws:billedMemoryUsedInMB",
+      "@type": "xsd:string"
+    },
+    "billedDurationInMilliseconds": {
+      "@id": "aws:billedDurationInMilliseconds",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "aws:tags",
+      "@type": "xsd:string"
+    },
+    "activities": {
+      "@id": "aws:activities",
+      "@type": "xsd:string"
+    },
+    "cloudWatchLogsLogGroup": {
+      "@id": "aws:cloudWatchLogsLogGroup",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "aws:region",
+      "@type": "xsd:string"
+    },
+    "parameters": {
+      "@id": "aws:parameters",
+      "@type": "xsd:string"
+    },
+    "heartbeatInSeconds": {
+      "@id": "aws:heartbeatInSeconds",
+      "@type": "xsd:string"
+    },
+    "definition": {
+      "@id": "aws:definition",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "aws:type",
+      "@type": "xsd:string"
+    },
+    "loggingConfiguration": {
+      "@id": "aws:loggingConfiguration",
+      "@type": "xsd:string"
+    },
+    "tracingConfiguration": {
+      "@id": "aws:tracingConfiguration",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "aws:label",
+      "@type": "xsd:string"
+    },
+    "revisionId": {
+      "@id": "aws:revisionId",
+      "@type": "xsd:string"
+    },
+    "pending": {
+      "@id": "aws:pending",
+      "@type": "xsd:string"
+    },
+    "running": {
+      "@id": "aws:running",
+      "@type": "xsd:string"
+    },
+    "succeeded": {
+      "@id": "aws:succeeded",
+      "@type": "xsd:string"
+    },
+    "failed": {
+      "@id": "aws:failed",
+      "@type": "xsd:string"
+    },
+    "timedOut": {
+      "@id": "aws:timedOut",
+      "@type": "xsd:string"
+    },
+    "aborted": {
+      "@id": "aws:aborted",
+      "@type": "xsd:string"
+    },
+    "total": {
+      "@id": "aws:total",
+      "@type": "xsd:string"
+    },
+    "resultsWritten": {
+      "@id": "aws:resultsWritten",
+      "@type": "xsd:string"
+    },
+    "resourceArn": {
+      "@id": "aws:resourceArn",
+      "@type": "xsd:string"
+    },
+    "length": {
+      "@id": "aws:length",
+      "@type": "xsd:string"
+    },
+    "publish": {
+      "@id": "aws:publish",
+      "@type": "xsd:string"
+    },
+    "versionDescription": {
+      "@id": "aws:versionDescription",
+      "@type": "xsd:string"
+    },
+    "executions": {
+      "@id": "aws:executions",
+      "@type": "xsd:string"
+    },
+    "tagKeys": {
+      "@id": "aws:tagKeys",
+      "@type": "xsd:string"
+    },
+    "mapRuns": {
+      "@id": "aws:mapRuns",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "aws:timestamp",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "aws:id",
+      "@type": "xsd:string"
+    },
+    "previousEventId": {
+      "@id": "aws:previousEventId",
+      "@type": "xsd:string"
+    },
+    "activityFailedEventDetails": {
+      "@id": "aws:activityFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "activityScheduleFailedEventDetails": {
+      "@id": "aws:activityScheduleFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "activityScheduledEventDetails": {
+      "@id": "aws:activityScheduledEventDetails",
+      "@type": "xsd:string"
+    },
+    "activityStartedEventDetails": {
+      "@id": "aws:activityStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "activitySucceededEventDetails": {
+      "@id": "aws:activitySucceededEventDetails",
+      "@type": "xsd:string"
+    },
+    "activityTimedOutEventDetails": {
+      "@id": "aws:activityTimedOutEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskFailedEventDetails": {
+      "@id": "aws:taskFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskScheduledEventDetails": {
+      "@id": "aws:taskScheduledEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskStartFailedEventDetails": {
+      "@id": "aws:taskStartFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskStartedEventDetails": {
+      "@id": "aws:taskStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskSubmitFailedEventDetails": {
+      "@id": "aws:taskSubmitFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskSubmittedEventDetails": {
+      "@id": "aws:taskSubmittedEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskSucceededEventDetails": {
+      "@id": "aws:taskSucceededEventDetails",
+      "@type": "xsd:string"
+    },
+    "taskTimedOutEventDetails": {
+      "@id": "aws:taskTimedOutEventDetails",
+      "@type": "xsd:string"
+    },
+    "executionFailedEventDetails": {
+      "@id": "aws:executionFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "executionStartedEventDetails": {
+      "@id": "aws:executionStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "executionSucceededEventDetails": {
+      "@id": "aws:executionSucceededEventDetails",
+      "@type": "xsd:string"
+    },
+    "executionAbortedEventDetails": {
+      "@id": "aws:executionAbortedEventDetails",
+      "@type": "xsd:string"
+    },
+    "executionTimedOutEventDetails": {
+      "@id": "aws:executionTimedOutEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapStateStartedEventDetails": {
+      "@id": "aws:mapStateStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapIterationStartedEventDetails": {
+      "@id": "aws:mapIterationStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapIterationSucceededEventDetails": {
+      "@id": "aws:mapIterationSucceededEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapIterationFailedEventDetails": {
+      "@id": "aws:mapIterationFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapIterationAbortedEventDetails": {
+      "@id": "aws:mapIterationAbortedEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionFailedEventDetails": {
+      "@id": "aws:lambdaFunctionFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionScheduleFailedEventDetails": {
+      "@id": "aws:lambdaFunctionScheduleFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionScheduledEventDetails": {
+      "@id": "aws:lambdaFunctionScheduledEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionStartFailedEventDetails": {
+      "@id": "aws:lambdaFunctionStartFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionSucceededEventDetails": {
+      "@id": "aws:lambdaFunctionSucceededEventDetails",
+      "@type": "xsd:string"
+    },
+    "lambdaFunctionTimedOutEventDetails": {
+      "@id": "aws:lambdaFunctionTimedOutEventDetails",
+      "@type": "xsd:string"
+    },
+    "stateEnteredEventDetails": {
+      "@id": "aws:stateEnteredEventDetails",
+      "@type": "xsd:string"
+    },
+    "stateExitedEventDetails": {
+      "@id": "aws:stateExitedEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapRunStartedEventDetails": {
+      "@id": "aws:mapRunStartedEventDetails",
+      "@type": "xsd:string"
+    },
+    "mapRunFailedEventDetails": {
+      "@id": "aws:mapRunFailedEventDetails",
+      "@type": "xsd:string"
+    },
+    "stateMachines": {
+      "@id": "aws:stateMachines",
+      "@type": "xsd:string"
+    },
+    "stateMachineVersions": {
+      "@id": "aws:stateMachineVersions",
+      "@type": "xsd:string"
+    },
+    "statusFilter": {
+      "@id": "aws:statusFilter",
+      "@type": "xsd:string"
+    },
+    "logGroupArn": {
+      "@id": "aws:logGroupArn",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "aws:enabled",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "aws:events",
+      "@type": "xsd:string"
+    },
+    "itemCount": {
+      "@id": "aws:itemCount",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "aws:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "aws:value",
+      "@type": "xsd:string"
+    },
+    "truncated": {
+      "@id": "aws:truncated",
+      "@type": "xsd:string"
     }
   }
 }

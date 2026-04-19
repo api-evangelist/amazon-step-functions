@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-activity-started-event-details-schema.json",
+  "title": "ActivityStartedEventDetails",
+  "description": "Contains details about the start of an activity during an execution.",
+  "type": "object",
+  "properties": {
+    "workerName": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Identity"
+        },
+        {
+          "description": "The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>."
+        }
+      ]
+    }
+  }
+}

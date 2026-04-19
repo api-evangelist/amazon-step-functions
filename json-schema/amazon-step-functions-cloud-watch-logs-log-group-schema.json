@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-cloud-watch-logs-log-group-schema.json",
+  "title": "CloudWatchLogsLogGroup",
+  "description": "<p/>",
+  "type": "object",
+  "properties": {
+    "logGroupArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> "
+        }
+      ]
+    }
+  }
+}

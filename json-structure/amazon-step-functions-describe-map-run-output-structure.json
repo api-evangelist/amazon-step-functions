@@ -1,0 +1,120 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-describe-map-run-output-structure.json",
+  "name": "DescribeMapRunOutput",
+  "description": "DescribeMapRunOutput schema from Amazon Step Functions API",
+  "properties": {
+    "mapRunArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LongArn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies a Map Run."
+        }
+      ]
+    },
+    "executionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies the execution in which the Map Run was started."
+        }
+      ]
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunStatus"
+        },
+        {
+          "description": "The current status of the Map Run."
+        }
+      ]
+    },
+    "startDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date when the Map Run was started."
+        }
+      ]
+    },
+    "stopDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date when the Map Run was stopped."
+        }
+      ]
+    },
+    "maxConcurrency": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MaxConcurrency"
+        },
+        {
+          "description": "The maximum number of child workflow executions configured to run in parallel for the Map Run at the same time."
+        }
+      ]
+    },
+    "toleratedFailurePercentage": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ToleratedFailurePercentage"
+        },
+        {
+          "description": "The maximum percentage of failed child workflow executions before the Map Run fails."
+        }
+      ]
+    },
+    "toleratedFailureCount": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ToleratedFailureCount"
+        },
+        {
+          "description": "The maximum number of failed child workflow executions before the Map Run fails."
+        }
+      ]
+    },
+    "itemCounts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunItemCounts"
+        },
+        {
+          "description": "A JSON object that contains information about the total number of items, and the item count for each processing status, such as <code>pending</code> and <code>failed</code>."
+        }
+      ]
+    },
+    "executionCounts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MapRunExecutionCounts"
+        },
+        {
+          "description": "A JSON object that contains information about the total number of child workflow executions for the Map Run, and the count of child workflow executions for each status, such as <code>failed</code> and <code>succeeded</code>."
+        }
+      ]
+    }
+  },
+  "required": [
+    "mapRunArn",
+    "executionArn",
+    "status",
+    "startDate",
+    "maxConcurrency",
+    "toleratedFailurePercentage",
+    "toleratedFailureCount",
+    "itemCounts",
+    "executionCounts"
+  ]
+}

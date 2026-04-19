@@ -1,0 +1,6 @@
+{
+  "stateMachineArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "name": "MyResource",
+  "input": "example-value",
+  "traceHeader": "example-value"
+}

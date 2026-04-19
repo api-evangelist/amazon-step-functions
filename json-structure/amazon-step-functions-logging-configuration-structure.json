@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-logging-configuration-structure.json",
+  "name": "LoggingConfiguration",
+  "description": "The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.",
+  "properties": {
+    "level": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LogLevel"
+        },
+        {
+          "description": "Defines which category of execution history events are logged."
+        }
+      ]
+    },
+    "includeExecutionData": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/IncludeExecutionData"
+        },
+        {
+          "description": "Determines whether execution data is included in your log. When set to <code>false</code>, data is excluded."
+        }
+      ]
+    },
+    "destinations": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LogDestinationList"
+        },
+        {
+          "description": "An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>."
+        }
+      ]
+    }
+  }
+}

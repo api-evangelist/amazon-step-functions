@@ -1,0 +1,9 @@
+{
+  "resourceType": "example-value",
+  "resource": "example-value",
+  "region": "example-value",
+  "parameters": "example-value",
+  "timeoutInSeconds": "example-value",
+  "heartbeatInSeconds": "example-value",
+  "taskCredentials": "example-value"
+}

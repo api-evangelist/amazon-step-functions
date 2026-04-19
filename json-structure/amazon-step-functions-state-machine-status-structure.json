@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-state-machine-status-structure.json",
+  "name": "StateMachineStatus",
+  "description": "StateMachineStatus schema from Amazon Step Functions API",
+  "enum": [
+    "ACTIVE",
+    "DELETING"
+  ]
+}

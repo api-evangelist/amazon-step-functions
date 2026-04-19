@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-map-run-status-structure.json",
+  "name": "MapRunStatus",
+  "description": "MapRunStatus schema from Amazon Step Functions API",
+  "enum": [
+    "RUNNING",
+    "SUCCEEDED",
+    "FAILED",
+    "ABORTED"
+  ]
+}

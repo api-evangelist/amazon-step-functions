@@ -1,0 +1,14 @@
+{
+  "type": "string",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-execution-status-structure.json",
+  "name": "ExecutionStatus",
+  "description": "ExecutionStatus schema from Amazon Step Functions API",
+  "enum": [
+    "RUNNING",
+    "SUCCEEDED",
+    "FAILED",
+    "TIMED_OUT",
+    "ABORTED"
+  ]
+}

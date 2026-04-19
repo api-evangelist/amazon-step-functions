@@ -1,0 +1,16 @@
+{
+  "executionArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "stateMachineArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "name": "MyResource",
+  "startDate": "example-value",
+  "stopDate": "example-value",
+  "status": "Active",
+  "error": "example-value",
+  "cause": "example-value",
+  "input": "example-value",
+  "inputDetails": "example-value",
+  "output": "example-value",
+  "outputDetails": "example-value",
+  "traceHeader": "example-value",
+  "billingDetails": "example-value"
+}

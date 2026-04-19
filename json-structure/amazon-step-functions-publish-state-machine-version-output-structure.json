@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-publish-state-machine-version-output-structure.json",
+  "name": "PublishStateMachineVersionOutput",
+  "description": "PublishStateMachineVersionOutput schema from Amazon Step Functions API",
+  "properties": {
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the version was created."
+        }
+      ]
+    },
+    "stateMachineVersionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) (ARN) that identifies the state machine version."
+        }
+      ]
+    }
+  },
+  "required": [
+    "creationDate",
+    "stateMachineVersionArn"
+  ]
+}

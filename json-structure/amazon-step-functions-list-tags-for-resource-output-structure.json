@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-list-tags-for-resource-output-structure.json",
+  "name": "ListTagsForResourceOutput",
+  "description": "ListTagsForResourceOutput schema from Amazon Step Functions API",
+  "properties": {
+    "tags": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagList"
+        },
+        {
+          "description": "An array of tags associated with the resource."
+        }
+      ]
+    }
+  }
+}

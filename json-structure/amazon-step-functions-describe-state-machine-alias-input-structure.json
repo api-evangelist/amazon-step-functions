@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-describe-state-machine-alias-input-structure.json",
+  "name": "DescribeStateMachineAliasInput",
+  "description": "DescribeStateMachineAliasInput schema from Amazon Step Functions API",
+  "properties": {
+    "stateMachineAliasArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the state machine alias."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineAliasArn"
+  ]
+}

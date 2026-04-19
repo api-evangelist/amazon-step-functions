@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-log-destination-structure.json",
+  "name": "LogDestination",
+  "description": "<p/>",
+  "properties": {
+    "cloudWatchLogsLogGroup": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CloudWatchLogsLogGroup"
+        },
+        {
+          "description": "An object describing a CloudWatch log group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html\">AWS::Logs::LogGroup</a> in the CloudFormation User Guide."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "stateMachineArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "definition": "example-value",
+  "roleArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "loggingConfiguration": "example-value",
+  "tracingConfiguration": "example-value",
+  "publish": "example-value",
+  "versionDescription": "example-value"
+}

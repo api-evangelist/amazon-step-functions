@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-lambda-function-scheduled-event-details-schema.json",
+  "title": "LambdaFunctionScheduledEventDetails",
+  "description": "Contains details about a Lambda function scheduled during an execution.",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the scheduled Lambda function."
+        }
+      ]
+    },
+    "input": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveData"
+        },
+        {
+          "description": "The JSON data input to the Lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    },
+    "inputDetails": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/HistoryEventExecutionDataDetails"
+        },
+        {
+          "description": "Contains details about input for an execution history event."
+        }
+      ]
+    },
+    "timeoutInSeconds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TimeoutInSeconds"
+        },
+        {
+          "description": "The maximum allowed duration of the Lambda function."
+        }
+      ]
+    },
+    "taskCredentials": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskCredentials"
+        },
+        {
+          "description": "The credentials that Step Functions uses for the task."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resource"
+  ]
+}

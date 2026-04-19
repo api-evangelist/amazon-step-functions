@@ -1,0 +1,12 @@
+{
+  "mapRunArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "executionArn": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "status": "Active",
+  "startDate": "example-value",
+  "stopDate": "example-value",
+  "maxConcurrency": "example-value",
+  "toleratedFailurePercentage": "example-value",
+  "toleratedFailureCount": "example-value",
+  "itemCounts": "example-value",
+  "executionCounts": "example-value"
+}

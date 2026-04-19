@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-send-task-heartbeat-output-structure.json",
+  "name": "SendTaskHeartbeatOutput",
+  "description": "SendTaskHeartbeatOutput schema from Amazon Step Functions API",
+  "properties": {}
+}

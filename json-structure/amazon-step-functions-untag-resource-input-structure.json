@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-untag-resource-input-structure.json",
+  "name": "UntagResourceInput",
+  "description": "UntagResourceInput schema from Amazon Step Functions API",
+  "properties": {
+    "resourceArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) for the Step Functions state machine or activity."
+        }
+      ]
+    },
+    "tagKeys": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TagKeyList"
+        },
+        {
+          "description": "The list of tags to remove from the resource."
+        }
+      ]
+    }
+  },
+  "required": [
+    "resourceArn",
+    "tagKeys"
+  ]
+}

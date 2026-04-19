@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-tracing-configuration-structure.json",
+  "name": "TracingConfiguration",
+  "description": "Selects whether or not the state machine's X-Ray tracing is enabled. Default is <code>false</code> ",
+  "properties": {
+    "enabled": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Enabled"
+        },
+        {
+          "description": "When set to <code>true</code>, X-Ray tracing is enabled."
+        }
+      ]
+    }
+  }
+}

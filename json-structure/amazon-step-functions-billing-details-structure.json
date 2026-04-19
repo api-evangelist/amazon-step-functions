@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-billing-details-structure.json",
+  "name": "BillingDetails",
+  "description": "An object that describes workflow billing details.",
+  "properties": {
+    "billedMemoryUsedInMB": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BilledMemoryUsed"
+        },
+        {
+          "description": "Billed memory consumption of your workflow, in MB."
+        }
+      ]
+    },
+    "billedDurationInMilliseconds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BilledDuration"
+        },
+        {
+          "description": "Billed duration of your workflow, in milliseconds."
+        }
+      ]
+    }
+  }
+}

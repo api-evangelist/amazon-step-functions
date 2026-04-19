@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-describe-state-machine-alias-output-schema.json",
+  "title": "DescribeStateMachineAliasOutput",
+  "description": "DescribeStateMachineAliasOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "stateMachineAliasArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the state machine alias."
+        }
+      ]
+    },
+    "name": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Name"
+        },
+        {
+          "description": "The name of the state machine alias."
+        }
+      ]
+    },
+    "description": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AliasDescription"
+        },
+        {
+          "description": "A description of the alias."
+        }
+      ]
+    },
+    "routingConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RoutingConfigurationList"
+        },
+        {
+          "description": "The routing configuration of the alias."
+        }
+      ]
+    },
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the state machine alias was created."
+        }
+      ]
+    },
+    "updateDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "<p>The date the state machine alias was last updated.</p> <p>For a newly created state machine, this is the same as the creation date.</p>"
+        }
+      ]
+    }
+  }
+}

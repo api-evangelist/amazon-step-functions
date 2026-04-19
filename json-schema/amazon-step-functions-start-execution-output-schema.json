@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-start-execution-output-schema.json",
+  "title": "StartExecutionOutput",
+  "description": "StartExecutionOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "executionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies the execution."
+        }
+      ]
+    },
+    "startDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the execution is started."
+        }
+      ]
+    }
+  },
+  "required": [
+    "executionArn",
+    "startDate"
+  ]
+}

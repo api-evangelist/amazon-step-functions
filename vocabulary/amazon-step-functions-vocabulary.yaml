@@ -1,0 +1,148 @@
+vocabulary: 1.0.0
+info:
+  provider: Amazon Step Functions
+  description: Vocabulary for Amazon Step Functions covering all resources, actions, and schemas.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - name: AWS Step Functions API
+    namespace: amazon-step-functions
+    version: '2024-01-01'
+    baseUrl: https://states.{region}.amazonaws.com
+    status: active
+  resources:
+  - name: State Machines
+    api: amazon-step-functions
+    actions: &id001
+    - CreateStateMachine
+    - DescribeStateMachine
+    - ListStateMachines
+    - DeleteStateMachine
+    - UpdateStateMachine
+  - name: Executions
+    api: amazon-step-functions
+    actions: &id002
+    - StartExecution
+    - StopExecution
+    - DescribeExecution
+    - ListExecutions
+    - GetExecutionHistory
+  - name: Activities
+    api: amazon-step-functions
+    actions: &id003
+    - CreateActivity
+    - DeleteActivity
+    - DescribeActivity
+    - ListActivities
+    - GetActivityTask
+    - SendTaskSuccess
+    - SendTaskFailure
+    - SendTaskHeartbeat
+  actions:
+  - name: list
+    httpMethod: GET
+    pattern: read
+  - name: get
+    httpMethod: GET
+    pattern: read
+  - name: describe
+    httpMethod: GET
+    pattern: read
+  - name: create
+    httpMethod: POST
+    pattern: write
+  - name: delete
+    httpMethod: DELETE
+    pattern: destructive
+  - name: update
+    httpMethod: PUT
+    pattern: write
+  - name: start
+    httpMethod: POST
+    pattern: write
+  - name: stop
+    httpMethod: POST
+    pattern: destructive
+  schemas:
+    core:
+    - State Machines
+    - Executions
+    - Activities
+  parameters:
+    pagination:
+    - nextToken
+    - maxResults
+    identifiers:
+    - arn
+    - name
+    - id
+  authentication:
+    schemes:
+    - AWS Signature Version 4
+    headers:
+    - Authorization
+    - X-Amz-Date
+    - X-Amz-Security-Token
+capability:
+  workflows:
+  - name: Amazon Step Functions Management
+    file: capabilities/shared/amazon-step-functions.yaml
+    description: Manage Amazon Step Functions resources
+    apis:
+    - AWS Step Functions API
+    personas:
+    - Developer
+    - Cloud Engineer
+  personas:
+  - id: developer
+    name: Developer
+    description: Developer using the API for application integration
+    workflows:
+    - Amazon Step Functions Management
+  - id: cloud-engineer
+    name: Cloud Engineer
+    description: Engineer managing cloud infrastructure
+    workflows:
+    - Amazon Step Functions Management
+  domains:
+  - AWS
+  - Workflow
+  - Orchestration
+  - Serverless
+  - State Machine
+  namespaces:
+  - name: amazon-step-functions
+    type: consumed
+  - name: amazon-step-functions-rest
+    type: rest
+    port: 8080
+  - name: amazon-step-functions-mcp
+    type: mcp
+    port: 9090
+  binds:
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+  - AWS_REGION
+crossReference:
+- resource: State Machines
+  operations: *id001
+  workflows:
+  - Amazon Step Functions Management
+  personas:
+  - Developer
+  - Cloud Engineer
+- resource: Executions
+  operations: *id002
+  workflows:
+  - Amazon Step Functions Management
+  personas:
+  - Developer
+  - Cloud Engineer
+- resource: Activities
+  operations: *id003
+  workflows:
+  - Amazon Step Functions Management
+  personas:
+  - Developer
+  - Cloud Engineer

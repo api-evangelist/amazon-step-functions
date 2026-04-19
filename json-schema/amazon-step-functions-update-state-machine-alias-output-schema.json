@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-update-state-machine-alias-output-schema.json",
+  "title": "UpdateStateMachineAliasOutput",
+  "description": "UpdateStateMachineAliasOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "updateDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date and time the state machine alias was updated."
+        }
+      ]
+    }
+  },
+  "required": [
+    "updateDate"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-get-activity-task-output-structure.json",
+  "name": "GetActivityTaskOutput",
+  "description": "GetActivityTaskOutput schema from Amazon Step Functions API",
+  "properties": {
+    "taskToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TaskToken"
+        },
+        {
+          "description": "A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task."
+        }
+      ]
+    },
+    "input": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SensitiveDataJobInput"
+        },
+        {
+          "description": "The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding."
+        }
+      ]
+    }
+  }
+}

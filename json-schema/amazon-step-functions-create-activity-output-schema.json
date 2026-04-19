@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-create-activity-output-schema.json",
+  "title": "CreateActivityOutput",
+  "description": "CreateActivityOutput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "activityArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies the created activity."
+        }
+      ]
+    },
+    "creationDate": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Timestamp"
+        },
+        {
+          "description": "The date the activity is created."
+        }
+      ]
+    }
+  },
+  "required": [
+    "activityArn",
+    "creationDate"
+  ]
+}

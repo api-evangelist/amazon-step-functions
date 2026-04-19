@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-describe-execution-input-schema.json",
+  "title": "DescribeExecutionInput",
+  "description": "DescribeExecutionInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "executionArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/Arn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) of the execution to describe."
+        }
+      ]
+    }
+  },
+  "required": [
+    "executionArn"
+  ]
+}

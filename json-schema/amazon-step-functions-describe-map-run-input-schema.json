@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-schema/amazon-step-functions-describe-map-run-input-schema.json",
+  "title": "DescribeMapRunInput",
+  "description": "DescribeMapRunInput schema from Amazon Step Functions API",
+  "type": "object",
+  "properties": {
+    "mapRunArn": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/LongArn"
+        },
+        {
+          "description": "The Amazon Resource Name (ARN) that identifies a Map Run."
+        }
+      ]
+    }
+  },
+  "required": [
+    "mapRunArn"
+  ]
+}

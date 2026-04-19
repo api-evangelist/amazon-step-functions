@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-delete-activity-output-structure.json",
+  "name": "DeleteActivityOutput",
+  "description": "DeleteActivityOutput schema from Amazon Step Functions API",
+  "properties": {}
+}

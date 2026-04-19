@@ -1,0 +1,10 @@
+{
+  "pending": "example-value",
+  "running": "example-value",
+  "succeeded": "example-value",
+  "failed": "example-value",
+  "timedOut": "example-value",
+  "aborted": "example-value",
+  "total": "example-value",
+  "resultsWritten": "example-value"
+}

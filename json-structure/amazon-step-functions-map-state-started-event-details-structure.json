@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-map-state-started-event-details-structure.json",
+  "name": "MapStateStartedEventDetails",
+  "description": "Details about a Map state that was started.",
+  "properties": {
+    "length": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UnsignedInteger"
+        },
+        {
+          "description": "The size of the array for Map state iterations."
+        }
+      ]
+    }
+  }
+}

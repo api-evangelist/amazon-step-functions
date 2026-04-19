@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-step-functions/refs/heads/main/json-structure/amazon-step-functions-list-state-machine-versions-output-structure.json",
+  "name": "ListStateMachineVersionsOutput",
+  "description": "ListStateMachineVersionsOutput schema from Amazon Step Functions API",
+  "properties": {
+    "stateMachineVersions": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StateMachineVersionList"
+        },
+        {
+          "description": "Versions for the state machine."
+        }
+      ]
+    },
+    "nextToken": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PageToken"
+        },
+        {
+          "description": "If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error."
+        }
+      ]
+    }
+  },
+  "required": [
+    "stateMachineVersions"
+  ]
+}
