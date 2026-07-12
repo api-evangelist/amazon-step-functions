@@ -33,6 +33,14 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/step-functions/faqs/
 common:
+  - type: TrustCenter
+    url: security/amazon-step-functions-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-step-functions-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-step-functions-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-step-functions-authentication.yml
   - type: Portal
     url: https://aws.amazon.com/step-functions/
   - type: Documentation

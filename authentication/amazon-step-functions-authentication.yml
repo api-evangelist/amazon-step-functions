@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amazon-step-functions-openapi.yml, openapi/amazon-step-functions.yaml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: sigv4Auth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: AWS Signature Version 4 authentication
+  sources:
+  - openapi/amazon-step-functions-openapi.yml
+  - openapi/amazon-step-functions.yaml
