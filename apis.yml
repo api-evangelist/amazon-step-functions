@@ -33,6 +33,8 @@ apis:
       - type: FAQ
         url: https://aws.amazon.com/step-functions/faqs/
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-step-functions-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-step-functions-trust-center.yml
   - type: VulnerabilityDisclosure
