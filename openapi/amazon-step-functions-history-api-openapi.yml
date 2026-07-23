@@ -1,0 +1,245 @@
+openapi: 3.1.0
+info:
+  title: Amazon Step Functions Executions History API
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: History
+  description: Operations for retrieving execution history events
+paths:
+  /#X-Amz-Target=AWSStepFunctions.GetExecutionHistory:
+    post:
+      operationId: getExecutionHistory
+      summary: Amazon Step Functions Get execution history
+      description: Returns the history of the specified execution as a list of events. The results are returned in reverse chronological order if nextToken is returned. Events are ordered by the timeStamp field.
+      tags:
+      - History
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-GetExecutionHistory'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+              - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution
+                maxResults:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+                  description: The maximum number of results to return
+                reverseOrder:
+                  type: boolean
+                  description: Lists events in descending order of their timeStamp
+                nextToken:
+                  type: string
+                  description: Pagination token from a previous call
+                includeExecutionData:
+                  type: boolean
+                  description: Whether to include execution data (input/output) in the response
+      responses:
+        '200':
+          description: Successfully retrieved execution history
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/GetExecutionHistoryOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+components:
+  parameters:
+    X-Amz-Target-GetExecutionHistory:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.GetExecutionHistory
+  schemas:
+    GetExecutionHistoryOutput:
+      type: object
+      properties:
+        events:
+          type: array
+          description: The list of events that occurred in the execution
+          items:
+            $ref: '#/components/schemas/HistoryEvent'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+    HistoryEvent:
+      type: object
+      description: Contains details about the events of an execution
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: The date and time the event occurred
+        type:
+          type: string
+          description: The type of the event
+          enum:
+          - ActivityFailed
+          - ActivityScheduled
+          - ActivityScheduleFailed
+          - ActivityStarted
+          - ActivitySucceeded
+          - ActivityTimedOut
+          - ChoiceStateEntered
+          - ChoiceStateExited
+          - ExecutionAborted
+          - ExecutionFailed
+          - ExecutionStarted
+          - ExecutionSucceeded
+          - ExecutionTimedOut
+          - FailStateEntered
+          - LambdaFunctionFailed
+          - LambdaFunctionScheduled
+          - LambdaFunctionScheduleFailed
+          - LambdaFunctionStarted
+          - LambdaFunctionStartFailed
+          - LambdaFunctionSucceeded
+          - LambdaFunctionTimedOut
+          - MapIterationAborted
+          - MapIterationFailed
+          - MapIterationStarted
+          - MapIterationSucceeded
+          - MapStateAborted
+          - MapStateEntered
+          - MapStateExited
+          - MapStateFailed
+          - MapStateStarted
+          - MapStateSucceeded
+          - ParallelStateAborted
+          - ParallelStateEntered
+          - ParallelStateExited
+          - ParallelStateFailed
+          - ParallelStateStarted
+          - ParallelStateSucceeded
+          - PassStateEntered
+          - PassStateExited
+          - SucceedStateEntered
+          - SucceedStateExited
+          - TaskFailed
+          - TaskScheduled
+          - TaskStarted
+          - TaskStartFailed
+          - TaskStateAborted
+          - TaskStateEntered
+          - TaskStateExited
+          - TaskSubmitFailed
+          - TaskSubmitted
+          - TaskSucceeded
+          - TaskTimedOut
+          - WaitStateAborted
+          - WaitStateEntered
+          - WaitStateExited
+        id:
+          type: integer
+          description: The id of the event
+        previousEventId:
+          type: integer
+          description: The id of the previous event
+        executionStartedEventDetails:
+          type: object
+          description: Details for ExecutionStarted events
+          properties:
+            input:
+              type: string
+              description: The JSON data input to the execution
+            roleArn:
+              type: string
+              description: The ARN of the IAM role used for the execution
+        executionSucceededEventDetails:
+          type: object
+          description: Details for ExecutionSucceeded events
+          properties:
+            output:
+              type: string
+              description: The JSON data output by the execution
+        executionFailedEventDetails:
+          type: object
+          description: Details for ExecutionFailed events
+          properties:
+            error:
+              type: string
+              description: The error code of the failure
+            cause:
+              type: string
+              description: A more detailed explanation of the cause of the failure
+        stateEnteredEventDetails:
+          type: object
+          description: Details for state entered events
+          properties:
+            name:
+              type: string
+              description: The name of the state
+            input:
+              type: string
+              description: The JSON input to the state
+        stateExitedEventDetails:
+          type: object
+          description: Details for state exited events
+          properties:
+            name:
+              type: string
+              description: The name of the state
+            output:
+              type: string
+              description: The JSON output from the state
+        taskScheduledEventDetails:
+          type: object
+          description: Details for TaskScheduled events
+          properties:
+            resourceType:
+              type: string
+              description: The service name of the resource in the task
+            resource:
+              type: string
+              description: The action of the resource called by the task
+            parameters:
+              type: string
+              description: The JSON data of the resource parameters
+        lambdaFunctionScheduledEventDetails:
+          type: object
+          description: Details for LambdaFunctionScheduled events
+          properties:
+            resource:
+              type: string
+              description: The ARN of the scheduled Lambda function
+            input:
+              type: string
+              description: The JSON data input to the Lambda function
+            timeoutInSeconds:
+              type: integer
+              description: The maximum allowed duration of the Lambda function
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

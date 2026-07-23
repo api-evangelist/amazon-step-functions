@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.SendTaskSuccess API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.SendTaskSuccess'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.SendTaskSuccess:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: SendTaskSuccess
+      description: Used by activity workers and task states using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a> pattern to report that the task identified by the <code>taskToken</code> completed successfully.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTaskSuccessOutput'
+              examples:
+                SendTaskSuccess200Example:
+                  summary: Default SendTaskSuccess 200
+                  x-microcks-default: true
+                  value: {}
+        '480':
+          description: TaskDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDoesNotExist'
+              examples:
+                SendTaskSuccess480Example:
+                  summary: Default SendTaskSuccess 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidOutput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOutput'
+              examples:
+                SendTaskSuccess481Example:
+                  summary: Default SendTaskSuccess 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+              examples:
+                SendTaskSuccess482Example:
+                  summary: Default SendTaskSuccess 482
+                  x-microcks-default: true
+                  value: example-value
+        '483':
+          description: TaskTimedOut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTimedOut'
+              examples:
+                SendTaskSuccess483Example:
+                  summary: Default SendTaskSuccess 483
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendTaskSuccessInput'
+            examples:
+              SendTaskSuccessRequestExample:
+                summary: Default SendTaskSuccess request
+                x-microcks-default: true
+                value:
+                  taskToken: example-value
+                  output: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.SendTaskSuccess
+      summary: Amazon Send Task Success
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.SendTaskSuccess'
+components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    InvalidToken: {}
+    SensitiveData:
+      type: string
+      maxLength: 262144
+      format: password
+    TaskToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    TaskTimedOut: {}
+    SendTaskSuccessOutput:
+      type: object
+      properties: {}
+    SendTaskSuccessInput:
+      type: object
+      required:
+      - taskToken
+      - output
+      title: SendTaskSuccessInput
+      properties:
+        taskToken:
+          allOf:
+          - $ref: '#/components/schemas/TaskToken'
+          - description: The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.
+        output:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+    TaskDoesNotExist: {}
+    InvalidOutput: {}
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

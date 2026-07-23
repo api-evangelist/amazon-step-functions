@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.UpdateStateMachineAlias API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.UpdateStateMachineAlias'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.UpdateStateMachineAlias:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateStateMachineAlias
+      description: <p>Updates the configuration of an existing state machine <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html">alias</a> by modifying its <code>description</code> or <code>routingConfiguration</code>.</p> <p>You must specify at least one of the <code>description</code> or <code>routingConfiguration</code> parameters to update a state machine alias.</p> <note> <p> <code>UpdateStateMachineAlias</code> is an idempotent API. Step Functions bases the idempotency check on the <code>stateMachineAliasArn</code>, <code>description</code>, and <code>routingConfiguration</code> parameters. Requests with the same parameters return an idempotent response.</p> </note> <note> <p>This operation is eventually consistent. All <a>StartExecution</a> requests made within a few seconds use the latest alias configuration. Executions started immediately after calling <code>UpdateStateMachineAlias</code> may use the previous routing configuration.</p> </note> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>CreateStateMachineAlias</a> </p> </li> <li> <p> <a>DescribeStateMachineAlias</a> </p> </li> <li> <p> <a>ListStateMachineAliases</a> </p> </li> <li> <p> <a>DeleteStateMachineAlias</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStateMachineAliasOutput'
+              examples:
+                UpdateStateMachineAlias200Example:
+                  summary: Default UpdateStateMachineAlias 200
+                  x-microcks-default: true
+                  value:
+                    updateDate: example-value
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+              examples:
+                UpdateStateMachineAlias480Example:
+                  summary: Default UpdateStateMachineAlias 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                UpdateStateMachineAlias481Example:
+                  summary: Default UpdateStateMachineAlias 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+              examples:
+                UpdateStateMachineAlias482Example:
+                  summary: Default UpdateStateMachineAlias 482
+                  x-microcks-default: true
+                  value: example-value
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+              examples:
+                UpdateStateMachineAlias483Example:
+                  summary: Default UpdateStateMachineAlias 483
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStateMachineAliasInput'
+            examples:
+              UpdateStateMachineAliasRequestExample:
+                summary: Default UpdateStateMachineAlias request
+                x-microcks-default: true
+                value:
+                  stateMachineAliasArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  description: example-value
+                  routingConfiguration: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.UpdateStateMachineAlias
+      summary: Amazon Update State Machine Alias
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.UpdateStateMachineAlias'
+components:
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    ValidationException: {}
+    InvalidArn: {}
+    RoutingConfigurationListItem:
+      type: object
+      required:
+      - stateMachineVersionArn
+      - weight
+      properties:
+        stateMachineVersionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.</p> <p>If you specify the ARN of a second version, it must belong to the same state machine as the first version.</p>
+        weight:
+          allOf:
+          - $ref: '#/components/schemas/VersionWeight'
+          - description: The percentage of traffic you want to route to the second state machine version. The sum of the weights in the routing configuration must be equal to 100.
+      description: Contains details about the routing configuration of a state machine alias. In a routing configuration, you define an array of objects that specify up to two state machine versions. You also specify the percentage of traffic to be routed to each version.
+    RoutingConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutingConfigurationListItem'
+      minItems: 1
+      maxItems: 2
+    AliasDescription:
+      type: string
+      maxLength: 256
+      format: password
+    VersionWeight:
+      type: integer
+      minimum: 0
+      maximum: 100
+    UpdateStateMachineAliasInput:
+      type: object
+      required:
+      - stateMachineAliasArn
+      title: UpdateStateMachineAliasInput
+      properties:
+        stateMachineAliasArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the state machine alias.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/AliasDescription'
+          - description: A description of the state machine alias.
+        routingConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/RoutingConfigurationList'
+          - description: <p>The routing configuration of the state machine alias.</p> <p>An array of <code>RoutingConfig</code> objects that specifies up to two state machine versions that the alias starts executions for.</p>
+    ConflictException: {}
+    Timestamp:
+      type: string
+      format: date-time
+    ResourceNotFound: {}
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    UpdateStateMachineAliasOutput:
+      type: object
+      required:
+      - updateDate
+      properties:
+        updateDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date and time the state machine alias was updated.
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.SendTaskHeartbeat API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.SendTaskHeartbeat'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.SendTaskHeartbeat:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: SendTaskHeartbeat
+      description: <p>Used by activity workers and task states using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a> pattern to report to Step Functions that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine's Amazon States Language definition (<code>HeartbeatSeconds</code>). This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an <code>ActivityTimedOut</code> entry for activities, or a <code>TaskTimedOut</code> entry for for tasks using the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync">job run</a> or <a href="https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token">callback</a> pattern.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received. Use <code>HeartbeatSeconds</code> to configure the timeout interval for heartbeats.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTaskHeartbeatOutput'
+              examples:
+                SendTaskHeartbeat200Example:
+                  summary: Default SendTaskHeartbeat 200
+                  x-microcks-default: true
+                  value: {}
+        '480':
+          description: TaskDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDoesNotExist'
+              examples:
+                SendTaskHeartbeat480Example:
+                  summary: Default SendTaskHeartbeat 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+              examples:
+                SendTaskHeartbeat481Example:
+                  summary: Default SendTaskHeartbeat 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: TaskTimedOut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTimedOut'
+              examples:
+                SendTaskHeartbeat482Example:
+                  summary: Default SendTaskHeartbeat 482
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendTaskHeartbeatInput'
+            examples:
+              SendTaskHeartbeatRequestExample:
+                summary: Default SendTaskHeartbeat request
+                x-microcks-default: true
+                value:
+                  taskToken: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.SendTaskHeartbeat
+      summary: Amazon Send Task Heartbeat
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.SendTaskHeartbeat'
+components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    SendTaskHeartbeatOutput:
+      type: object
+      properties: {}
+    SendTaskHeartbeatInput:
+      type: object
+      required:
+      - taskToken
+      title: SendTaskHeartbeatInput
+      properties:
+        taskToken:
+          allOf:
+          - $ref: '#/components/schemas/TaskToken'
+          - description: The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.
+    InvalidToken: {}
+    TaskTimedOut: {}
+    TaskToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    TaskDoesNotExist: {}
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

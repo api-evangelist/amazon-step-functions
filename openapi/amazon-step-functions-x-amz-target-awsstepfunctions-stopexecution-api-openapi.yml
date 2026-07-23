@@ -1,0 +1,208 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.StopExecution API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.StopExecution'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.StopExecution:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StopExecution
+      description: <p>Stops an execution.</p> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopExecutionOutput'
+              examples:
+                StopExecution200Example:
+                  summary: Default StopExecution 200
+                  x-microcks-default: true
+                  value:
+                    stopDate: example-value
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+              examples:
+                StopExecution480Example:
+                  summary: Default StopExecution 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                StopExecution481Example:
+                  summary: Default StopExecution 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+              examples:
+                StopExecution482Example:
+                  summary: Default StopExecution 482
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopExecutionInput'
+            examples:
+              StopExecutionRequestExample:
+                summary: Default StopExecution request
+                x-microcks-default: true
+                value:
+                  executionArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  error: example-value
+                  cause: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.StopExecution
+      summary: Amazon Stop Execution
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.StopExecution'
+components:
+  schemas:
+    SensitiveError:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
+    ValidationException: {}
+    StopExecutionInput:
+      type: object
+      required:
+      - executionArn
+      title: StopExecutionInput
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the execution to stop.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveError'
+          - description: The error code of the failure.
+        cause:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveCause'
+          - description: A more detailed explanation of the cause of the failure.
+    SensitiveCause:
+      type: string
+      minLength: 0
+      maxLength: 32768
+      format: password
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    InvalidArn: {}
+    Timestamp:
+      type: string
+      format: date-time
+    ExecutionDoesNotExist: {}
+    StopExecutionOutput:
+      type: object
+      required:
+      - stopDate
+      properties:
+        stopDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the execution is stopped.
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

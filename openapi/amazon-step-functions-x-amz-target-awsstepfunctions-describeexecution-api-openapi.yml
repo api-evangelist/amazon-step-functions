@@ -1,0 +1,297 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.DescribeExecution API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.DescribeExecution'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.DescribeExecution:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: DescribeExecution
+      description: <p>Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run Amazon Resource Name (ARN) if the execution was dispatched by a Map Run.</p> <p>If you specify a version or alias ARN when you call the <a>StartExecution</a> API action, <code>DescribeExecution</code> returns that ARN.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>Executions of an <code>EXPRESS</code> state machinearen't supported by <code>DescribeExecution</code> unless a Map Run dispatched them.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExecutionOutput'
+              examples:
+                DescribeExecution200Example:
+                  summary: Default DescribeExecution 200
+                  x-microcks-default: true
+                  value:
+                    executionArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    name: MyResource
+                    status: Active
+                    startDate: example-value
+                    stopDate: example-value
+                    input: example-value
+                    inputDetails:
+                      included: example-value
+                    output: example-value
+                    outputDetails:
+                      included: example-value
+                    traceHeader: example-value
+                    mapRunArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    error: example-value
+                    cause: example-value
+                    stateMachineVersionArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    stateMachineAliasArn: arn:aws:service:us-east-1:123456789012:resource/example
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+              examples:
+                DescribeExecution480Example:
+                  summary: Default DescribeExecution 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                DescribeExecution481Example:
+                  summary: Default DescribeExecution 481
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExecutionInput'
+            examples:
+              DescribeExecutionRequestExample:
+                summary: Default DescribeExecution request
+                x-microcks-default: true
+                value:
+                  executionArn: arn:aws:service:us-east-1:123456789012:resource/example
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.DescribeExecution
+      summary: Amazon Describe Execution
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.DescribeExecution'
+components:
+  schemas:
+    DescribeExecutionInput:
+      type: object
+      required:
+      - executionArn
+      title: DescribeExecutionInput
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the execution to describe.
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    includedDetails:
+      type: boolean
+    ExecutionStatus:
+      type: string
+      enum:
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - TIMED_OUT
+      - ABORTED
+    InvalidArn: {}
+    ExecutionDoesNotExist: {}
+    SensitiveData:
+      type: string
+      maxLength: 262144
+      format: password
+    TraceHeader:
+      type: string
+      pattern: \p{ASCII}*
+      minLength: 0
+      maxLength: 256
+    SensitiveError:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
+    CloudWatchEventsExecutionDataDetails:
+      type: object
+      properties:
+        included:
+          allOf:
+          - $ref: '#/components/schemas/includedDetails'
+          - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls. '
+      description: Provides details about execution input or output.
+    SensitiveCause:
+      type: string
+      minLength: 0
+      maxLength: 32768
+      format: password
+    DescribeExecutionOutput:
+      type: object
+      required:
+      - executionArn
+      - stateMachineArn
+      - status
+      - startDate
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) that identifies the execution.
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the executed stated machine.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ExecutionStatus'
+          - description: The current status of the execution.
+        startDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the execution is started.
+        stopDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: If the execution ended, the date the execution stopped.
+        input:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+        inputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        output:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: <p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>
+        outputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        traceHeader:
+          allOf:
+          - $ref: '#/components/schemas/TraceHeader'
+          - description: The X-Ray trace header that was passed to the execution.
+        mapRunArn:
+          allOf:
+          - $ref: '#/components/schemas/LongArn'
+          - description: The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched this execution.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveError'
+          - description: The error string if the state machine execution failed.
+        cause:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveCause'
+          - description: The cause string if the state machine execution failed.
+        stateMachineVersionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) of the state machine version associated with the execution. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p> <p>If you start an execution from a <code>StartExecution</code> request without specifying a state machine version or alias ARN, Step Functions returns a null value.</p>
+        stateMachineAliasArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) of the state machine alias associated with the execution. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, <code>stateMachineARN:PROD</code>.</p> <p>If you start an execution from a <code>StartExecution</code> request with a state machine version ARN, this field will be null.</p>
+    LongArn:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    Timestamp:
+      type: string
+      format: date-time
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.ListMapRuns API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.ListMapRuns'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.ListMapRuns:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListMapRuns
+      description: Lists all Map Runs that were started by a given state machine execution. Use this API action to obtain Map Run ARNs, and then call <code>DescribeMapRun</code> to obtain more information, if needed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMapRunsOutput'
+              examples:
+                ListMapRuns200Example:
+                  summary: Default ListMapRuns 200
+                  x-microcks-default: true
+                  value:
+                    mapRuns: example-value
+                    nextToken: example-value
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+              examples:
+                ListMapRuns480Example:
+                  summary: Default ListMapRuns 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                ListMapRuns481Example:
+                  summary: Default ListMapRuns 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+              examples:
+                ListMapRuns482Example:
+                  summary: Default ListMapRuns 482
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMapRunsInput'
+            examples:
+              ListMapRunsRequestExample:
+                summary: Default ListMapRuns request
+                x-microcks-default: true
+                value:
+                  executionArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  maxResults: example-value
+                  nextToken: example-value
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: string
+        description: Pagination limit
+        required: false
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token
+        required: false
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.ListMapRuns
+      summary: Amazon List Map Runs
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.ListMapRuns'
+components:
+  schemas:
+    PageSize:
+      type: integer
+      minimum: 0
+      maximum: 1000
+    MapRunListItem:
+      type: object
+      required:
+      - executionArn
+      - mapRunArn
+      - stateMachineArn
+      - startDate
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The <code>executionArn</code> of the execution from which the Map Run was started.
+        mapRunArn:
+          allOf:
+          - $ref: '#/components/schemas/LongArn'
+          - description: The Amazon Resource Name (ARN) of the Map Run.
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the executed state machine.
+        startDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date on which the Map Run started.
+        stopDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date on which the Map Run stopped.
+      description: Contains details about a specific Map Run.
+    ListMapRunsOutput:
+      type: object
+      required:
+      - mapRuns
+      properties:
+        mapRuns:
+          allOf:
+          - $ref: '#/components/schemas/MapRunList'
+          - description: An array that lists information related to a Map Run, such as the Amazon Resource Name (ARN) of the Map Run and the ARN of the state machine that started the Map Run.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/PageToken'
+          - description: If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.
+    InvalidToken: {}
+    InvalidArn: {}
+    MapRunList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MapRunListItem'
+    ExecutionDoesNotExist: {}
+    ListMapRunsInput:
+      type: object
+      required:
+      - executionArn
+      title: ListMapRunsInput
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.
+        maxResults:
+          allOf:
+          - $ref: '#/components/schemas/PageSize'
+          - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/PageToken'
+          - description: If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.
+    LongArn:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    Timestamp:
+      type: string
+      format: date-time
+    PageToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

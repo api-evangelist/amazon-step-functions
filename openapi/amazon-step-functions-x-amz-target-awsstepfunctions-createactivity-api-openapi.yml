@@ -1,0 +1,227 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.CreateActivity API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.CreateActivity'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.CreateActivity:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: CreateActivity
+      description: <p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateActivity</code>'s idempotency check is based on the activity <code>name</code>. If a following request has different <code>tags</code> values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateActivityOutput'
+              examples:
+                CreateActivity200Example:
+                  summary: Default CreateActivity 200
+                  x-microcks-default: true
+                  value:
+                    activityArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    creationDate: example-value
+        '480':
+          description: ActivityLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityLimitExceeded'
+              examples:
+                CreateActivity480Example:
+                  summary: Default CreateActivity 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+              examples:
+                CreateActivity481Example:
+                  summary: Default CreateActivity 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: TooManyTags
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTags'
+              examples:
+                CreateActivity482Example:
+                  summary: Default CreateActivity 482
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateActivityInput'
+            examples:
+              CreateActivityRequestExample:
+                summary: Default CreateActivity request
+                x-microcks-default: true
+                value:
+                  name: MyResource
+                  tags: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.CreateActivity
+      summary: Amazon Create Activity
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.CreateActivity'
+components:
+  schemas:
+    Tag:
+      type: object
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The key of a tag.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The value of a tag.
+      description: '<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    CreateActivityOutput:
+      type: object
+      required:
+      - activityArn
+      - creationDate
+      properties:
+        activityArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) that identifies the created activity.
+        creationDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the activity is created.
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    ActivityLimitExceeded: {}
+    CreateActivityInput:
+      type: object
+      required:
+      - name
+      title: CreateActivityInput
+      properties:
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: '<p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagList'
+          - description: '<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TooManyTags: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    InvalidName: {}
+    Timestamp:
+      type: string
+      format: date-time
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

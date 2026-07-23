@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.ListTagsForResource API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.ListTagsForResource'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.ListTagsForResource:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListTagsForResource
+      description: '<p>List tags for a given resource.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+              examples:
+                ListTagsForResource200Example:
+                  summary: Default ListTagsForResource 200
+                  x-microcks-default: true
+                  value:
+                    tags: example-value
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                ListTagsForResource480Example:
+                  summary: Default ListTagsForResource 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+              examples:
+                ListTagsForResource481Example:
+                  summary: Default ListTagsForResource 481
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceInput'
+            examples:
+              ListTagsForResourceRequestExample:
+                summary: Default ListTagsForResource request
+                x-microcks-default: true
+                value:
+                  resourceArn: arn:aws:service:us-east-1:123456789012:resource/example
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.ListTagsForResource
+      summary: Amazon List Tags For Resource
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.ListTagsForResource'
+components:
+  schemas:
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        tags:
+          allOf:
+          - $ref: '#/components/schemas/TagList'
+          - description: An array of tags associated with the resource.
+    Tag:
+      type: object
+      properties:
+        key:
+          allOf:
+          - $ref: '#/components/schemas/TagKey'
+          - description: The key of a tag.
+        value:
+          allOf:
+          - $ref: '#/components/schemas/TagValue'
+          - description: The value of a tag.
+      description: '<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    InvalidArn: {}
+    ResourceNotFound: {}
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ListTagsForResourceInput:
+      type: object
+      required:
+      - resourceArn
+      title: ListTagsForResourceInput
+      properties:
+        resourceArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

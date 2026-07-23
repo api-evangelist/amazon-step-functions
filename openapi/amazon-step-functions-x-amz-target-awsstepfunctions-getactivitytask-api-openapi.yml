@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.GetActivityTask API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.GetActivityTask'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.GetActivityTask:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: GetActivityTask
+      description: <p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a <code>taskToken</code> with a null string.</p> <note> <p>This API action isn't logged in CloudTrail.</p> </note> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html">Avoid Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p> </important>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActivityTaskOutput'
+              examples:
+                GetActivityTask200Example:
+                  summary: Default GetActivityTask 200
+                  x-microcks-default: true
+                  value:
+                    taskToken: example-value
+                    input: example-value
+        '480':
+          description: ActivityDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityDoesNotExist'
+              examples:
+                GetActivityTask480Example:
+                  summary: Default GetActivityTask 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: ActivityWorkerLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityWorkerLimitExceeded'
+              examples:
+                GetActivityTask481Example:
+                  summary: Default GetActivityTask 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                GetActivityTask482Example:
+                  summary: Default GetActivityTask 482
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetActivityTaskInput'
+            examples:
+              GetActivityTaskRequestExample:
+                summary: Default GetActivityTask request
+                x-microcks-default: true
+                value:
+                  activityArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  workerName: MyResource
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.GetActivityTask
+      summary: Amazon Get Activity Task
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.GetActivityTask'
+components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    ActivityDoesNotExist: {}
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    InvalidArn: {}
+    SensitiveDataJobInput:
+      type: string
+      maxLength: 262144
+      format: password
+    GetActivityTaskOutput:
+      type: object
+      properties:
+        taskToken:
+          allOf:
+          - $ref: '#/components/schemas/TaskToken'
+          - description: A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.
+        input:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveDataJobInput'
+          - description: The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+    GetActivityTaskInput:
+      type: object
+      required:
+      - activityArn
+      title: GetActivityTaskInput
+      properties:
+        activityArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
+        workerName:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
+    TaskToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    ActivityWorkerLimitExceeded: {}
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

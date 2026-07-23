@@ -1,0 +1,166 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.DeleteStateMachine API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.DeleteStateMachine'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.DeleteStateMachine:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: DeleteStateMachine
+      description: '<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine''s status to <code>DELETING</code> and begins the deletion process. </p> <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p> <p>The following are some examples of qualified and unqualified state machine ARNs:</p> <ul> <li> <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p> <p> <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code> </p> <note> <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p> </note> </li> <li> <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p> <p> <code>arn:partition:states:region:account-id:stateMachine:myStateMachine</code> </p> </li> </ul> <p>This API action also deletes all <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html">versions</a> and <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html">aliases</a> associated with a state machine.</p> <note> <p>For <code>EXPRESS</code> state machines, the deletion happens eventually (usually in less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code> API is called.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStateMachineOutput'
+              examples:
+                DeleteStateMachine200Example:
+                  summary: Default DeleteStateMachine 200
+                  x-microcks-default: true
+                  value: {}
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                DeleteStateMachine480Example:
+                  summary: Default DeleteStateMachine 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+              examples:
+                DeleteStateMachine481Example:
+                  summary: Default DeleteStateMachine 481
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStateMachineInput'
+            examples:
+              DeleteStateMachineRequestExample:
+                summary: Default DeleteStateMachine request
+                x-microcks-default: true
+                value:
+                  stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.DeleteStateMachine
+      summary: Amazon Delete State Machine
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.DeleteStateMachine'
+components:
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    DeleteStateMachineInput:
+      type: object
+      required:
+      - stateMachineArn
+      title: DeleteStateMachineInput
+      properties:
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the state machine to delete.
+    DeleteStateMachineOutput:
+      type: object
+      properties: {}
+    ValidationException: {}
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    InvalidArn: {}
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

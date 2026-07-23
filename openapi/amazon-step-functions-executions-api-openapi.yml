@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: Amazon Step Functions Executions API
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: Executions
+  description: Operations for starting, stopping, describing, and listing executions
+paths:
+  /#X-Amz-Target=AWSStepFunctions.StartExecution:
+    post:
+      operationId: startExecution
+      summary: Amazon Step Functions Start a state machine execution
+      description: Starts a state machine execution. A qualified state machine ARN can refer to a specific version or alias. StartExecution is idempotent for STANDARD workflows but not for EXPRESS workflows.
+      tags:
+      - Executions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-StartExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/StartExecutionInput'
+      responses:
+        '200':
+          description: Successfully started execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/StartExecutionOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.DescribeExecution:
+    post:
+      operationId: describeExecution
+      summary: Amazon Step Functions Describe an execution
+      description: Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata.
+      tags:
+      - Executions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-DescribeExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+              - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution to describe
+      responses:
+        '200':
+          description: Successfully described execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeExecutionOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+  /#X-Amz-Target=AWSStepFunctions.ListExecutions:
+    post:
+      operationId: listExecutions
+      summary: Amazon Step Functions List executions of a state machine
+      description: Lists all executions of a state machine or a Map Run. Returns a paginated list of execution ARNs, names, statuses, and start dates.
+      tags:
+      - Executions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ListExecutions'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+              - stateMachineArn
+              properties:
+                stateMachineArn:
+                  type: string
+                  description: The ARN of the state machine
+                statusFilter:
+                  type: string
+                  description: Filter executions by status
+                  enum:
+                  - RUNNING
+                  - SUCCEEDED
+                  - FAILED
+                  - TIMED_OUT
+                  - ABORTED
+                  - PENDING_REDRIVE
+                maxResults:
+                  type: integer
+                  minimum: 0
+                  maximum: 1000
+                  description: The maximum number of results to return
+                nextToken:
+                  type: string
+                  description: Pagination token from a previous call
+      responses:
+        '200':
+          description: Successfully listed executions
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListExecutionsOutput'
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: State machine does not exist
+  /#X-Amz-Target=AWSStepFunctions.StopExecution:
+    post:
+      operationId: stopExecution
+      summary: Amazon Step Functions Stop an execution
+      description: Stops an execution. This API action is not supported by EXPRESS state machines. For EXPRESS state machines, use a Map Run to stop an execution.
+      tags:
+      - Executions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-StopExecution'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              type: object
+              required:
+              - executionArn
+              properties:
+                executionArn:
+                  type: string
+                  description: The ARN of the execution to stop
+                error:
+                  type: string
+                  description: The error code of the failure
+                cause:
+                  type: string
+                  description: A more detailed explanation of the cause of the failure
+      responses:
+        '200':
+          description: Successfully stopped execution
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  stopDate:
+                    type: string
+                    format: date-time
+                    description: The date the execution was stopped
+        '400':
+          description: Invalid request parameters
+        '404':
+          description: Execution does not exist
+components:
+  schemas:
+    ListExecutionsOutput:
+      type: object
+      properties:
+        executions:
+          type: array
+          description: List of executions
+          items:
+            $ref: '#/components/schemas/ExecutionListItem'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+    ExecutionListItem:
+      type: object
+      description: Contains details about an execution
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        stateMachineArn:
+          type: string
+          description: The ARN of the executed state machine
+        name:
+          type: string
+          description: The name of the execution
+        status:
+          type: string
+          description: The current status of the execution
+          enum:
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - TIMED_OUT
+          - ABORTED
+          - PENDING_REDRIVE
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+        stopDate:
+          type: string
+          format: date-time
+          description: The date the execution stopped
+    DescribeExecutionOutput:
+      type: object
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        stateMachineArn:
+          type: string
+          description: The ARN of the executed state machine
+        name:
+          type: string
+          description: The name of the execution
+        status:
+          type: string
+          description: The current status of the execution
+          enum:
+          - RUNNING
+          - SUCCEEDED
+          - FAILED
+          - TIMED_OUT
+          - ABORTED
+          - PENDING_REDRIVE
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+        stopDate:
+          type: string
+          format: date-time
+          description: The date the execution stopped (if completed)
+        input:
+          type: string
+          description: The JSON input data of the execution
+        output:
+          type: string
+          description: The JSON output data of the execution (if succeeded)
+        error:
+          type: string
+          description: The error code of the failure (if failed)
+        cause:
+          type: string
+          description: A more detailed explanation of the cause of the failure
+    StartExecutionInput:
+      type: object
+      required:
+      - stateMachineArn
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine to execute
+        name:
+          type: string
+          description: Optional name for the execution. Must be unique for your AWS account, region, and state machine for 90 days.
+          minLength: 1
+          maxLength: 80
+        input:
+          type: string
+          description: The string that contains the JSON input data for the execution. Maximum length of 262144 characters.
+        traceHeader:
+          type: string
+          description: Passes the X-Ray trace header for the execution
+    StartExecutionOutput:
+      type: object
+      properties:
+        executionArn:
+          type: string
+          description: The ARN of the execution
+        startDate:
+          type: string
+          format: date-time
+          description: The date the execution started
+  parameters:
+    X-Amz-Target-StopExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.StopExecution
+    X-Amz-Target-StartExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.StartExecution
+    X-Amz-Target-DescribeExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.DescribeExecution
+    X-Amz-Target-ListExecutions:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.ListExecutions
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

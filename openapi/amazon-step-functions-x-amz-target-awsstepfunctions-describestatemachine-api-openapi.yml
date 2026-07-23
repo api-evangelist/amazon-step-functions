@@ -1,0 +1,319 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.DescribeStateMachine API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.DescribeStateMachine'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.DescribeStateMachine:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: DescribeStateMachine
+      description: <p>Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration.</p> <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p> <p>The following are some examples of qualified and unqualified state machine ARNs:</p> <ul> <li> <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p> <p> <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code> </p> <note> <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p> </note> </li> <li> <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p> <p> <code>arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;</code> </p> <note> <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p> </note> </li> <li> <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p> <p> <code>arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;</code> </p> </li> </ul> <p>This API action returns the details for a state machine version if the <code>stateMachineArn</code> you specify is a state machine version ARN.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStateMachineOutput'
+              examples:
+                DescribeStateMachine200Example:
+                  summary: Default DescribeStateMachine 200
+                  x-microcks-default: true
+                  value:
+                    stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    name: MyResource
+                    status: Active
+                    definition: example-value
+                    roleArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    type: example-value
+                    creationDate: example-value
+                    loggingConfiguration:
+                      level: example-value
+                      includeExecutionData: example-value
+                      destinations: example-value
+                    tracingConfiguration: example-value
+                    label: example-value
+                    revisionId: example-value
+                    description: example-value
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                DescribeStateMachine480Example:
+                  summary: Default DescribeStateMachine 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+              examples:
+                DescribeStateMachine481Example:
+                  summary: Default DescribeStateMachine 481
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStateMachineInput'
+            examples:
+              DescribeStateMachineRequestExample:
+                summary: Default DescribeStateMachine request
+                x-microcks-default: true
+                value:
+                  stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.DescribeStateMachine
+      summary: Amazon Describe State Machine
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.DescribeStateMachine'
+components:
+  schemas:
+    LoggingConfiguration:
+      type: object
+      properties:
+        level:
+          allOf:
+          - $ref: '#/components/schemas/LogLevel'
+          - description: Defines which category of execution history events are logged.
+        includeExecutionData:
+          allOf:
+          - $ref: '#/components/schemas/IncludeExecutionData'
+          - description: Determines whether execution data is included in your log. When set to <code>false</code>, data is excluded.
+        destinations:
+          allOf:
+          - $ref: '#/components/schemas/LogDestinationList'
+          - description: An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.
+      description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
+    LogDestinationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogDestination'
+    TracingConfiguration:
+      type: object
+      properties:
+        enabled:
+          allOf:
+          - $ref: '#/components/schemas/Enabled'
+          - description: When set to <code>true</code>, X-Ray tracing is enabled.
+      description: 'Selects whether or not the state machine''s X-Ray tracing is enabled. Default is <code>false</code> '
+    RevisionId:
+      type: string
+    Definition:
+      type: string
+      minLength: 1
+      maxLength: 1048576
+      format: password
+    LogDestination:
+      type: object
+      properties:
+        cloudWatchLogsLogGroup:
+          allOf:
+          - $ref: '#/components/schemas/CloudWatchLogsLogGroup'
+          - description: An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the CloudFormation User Guide.
+      description: <p/>
+    DescribeStateMachineInput:
+      type: object
+      required:
+      - stateMachineArn
+      title: DescribeStateMachineInput
+      properties:
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) of the state machine for which you want the information.</p> <p>If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>
+    CloudWatchLogsLogGroup:
+      type: object
+      properties:
+        logGroupArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
+      description: <p/>
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    StateMachineStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETING
+    InvalidArn: {}
+    StateMachineType:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+    Enabled:
+      type: boolean
+    MapRunLabel:
+      type: string
+    LogLevel:
+      type: string
+      enum:
+      - ALL
+      - ERROR
+      - FATAL
+      - 'OFF'
+    IncludeExecutionData:
+      type: boolean
+    DescribeStateMachineOutput:
+      type: object
+      required:
+      - stateMachineArn
+      - name
+      - definition
+      - roleArn
+      - type
+      - creationDate
+      properties:
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) that identifies the state machine.</p> <p>If you specified a state machine version ARN in your request, the API returns the version ARN. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StateMachineStatus'
+          - description: The current status of the state machine.
+        definition:
+          allOf:
+          - $ref: '#/components/schemas/Definition'
+          - description: The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.
+        roleArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to Amazon Web Services resources.)
+        type:
+          allOf:
+          - $ref: '#/components/schemas/StateMachineType'
+          - description: The <code>type</code> of the state machine (<code>STANDARD</code> or <code>EXPRESS</code>).
+        creationDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: <p>The date the state machine is created.</p> <p>For a state machine version, <code>creationDate</code> is the date the version was created.</p>
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/TracingConfiguration'
+          - description: Selects whether X-Ray tracing is enabled.
+        label:
+          allOf:
+          - $ref: '#/components/schemas/MapRunLabel'
+          - description: A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN.
+        revisionId:
+          allOf:
+          - $ref: '#/components/schemas/RevisionId'
+          - description: <p>The revision identifier for the state machine.</p> <p>Use the <code>revisionId</code> parameter to compare between versions of a state machine configuration used for executions without performing a diff of the properties, such as <code>definition</code> and <code>roleArn</code>.</p>
+        description:
+          allOf:
+          - $ref: '#/components/schemas/VersionDescription'
+          - description: The description of the state machine version.
+    VersionDescription:
+      type: string
+      maxLength: 256
+      format: password
+    StateMachineDoesNotExist: {}
+    Timestamp:
+      type: string
+      format: date-time
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

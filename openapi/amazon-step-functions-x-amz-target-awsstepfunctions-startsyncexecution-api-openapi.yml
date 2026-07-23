@@ -1,0 +1,362 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.StartSyncExecution API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.StartSyncExecution'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.StartSyncExecution:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartSyncExecution
+      description: <p>Starts a Synchronous Express state machine execution. <code>StartSyncExecution</code> is not available for <code>STANDARD</code> workflows.</p> <note> <p> <code>StartSyncExecution</code> will return a <code>200 OK</code> response, even if your execution fails, because the status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your execution from running, such as permissions errors, limit errors, or issues with your state machine code and configuration. </p> </note> <note> <p>This API action isn't logged in CloudTrail.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSyncExecutionOutput'
+              examples:
+                StartSyncExecution200Example:
+                  summary: Default StartSyncExecution 200
+                  x-microcks-default: true
+                  value:
+                    executionArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+                    name: MyResource
+                    startDate: example-value
+                    stopDate: example-value
+                    status: Active
+                    error: example-value
+                    cause: example-value
+                    input: example-value
+                    inputDetails:
+                      included: example-value
+                    output: example-value
+                    outputDetails:
+                      included: example-value
+                    traceHeader: example-value
+                    billingDetails: example-value
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                StartSyncExecution480Example:
+                  summary: Default StartSyncExecution 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: InvalidExecutionInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidExecutionInput'
+              examples:
+                StartSyncExecution481Example:
+                  summary: Default StartSyncExecution 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+              examples:
+                StartSyncExecution482Example:
+                  summary: Default StartSyncExecution 482
+                  x-microcks-default: true
+                  value: example-value
+        '483':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+              examples:
+                StartSyncExecution483Example:
+                  summary: Default StartSyncExecution 483
+                  x-microcks-default: true
+                  value: example-value
+        '484':
+          description: StateMachineDeleting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDeleting'
+              examples:
+                StartSyncExecution484Example:
+                  summary: Default StartSyncExecution 484
+                  x-microcks-default: true
+                  value: example-value
+        '485':
+          description: StateMachineTypeNotSupported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineTypeNotSupported'
+              examples:
+                StartSyncExecution485Example:
+                  summary: Default StartSyncExecution 485
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSyncExecutionInput'
+            examples:
+              StartSyncExecutionRequestExample:
+                summary: Default StartSyncExecution request
+                x-microcks-default: true
+                value:
+                  stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  name: MyResource
+                  input: example-value
+                  traceHeader: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.StartSyncExecution
+      summary: Amazon Start Sync Execution
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.StartSyncExecution'
+components:
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  schemas:
+    BillingDetails:
+      type: object
+      properties:
+        billedMemoryUsedInMB:
+          allOf:
+          - $ref: '#/components/schemas/BilledMemoryUsed'
+          - description: Billed memory consumption of your workflow, in MB.
+        billedDurationInMilliseconds:
+          allOf:
+          - $ref: '#/components/schemas/BilledDuration'
+          - description: Billed duration of your workflow, in milliseconds.
+      description: An object that describes workflow billing details.
+    InvalidExecutionInput: {}
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    SyncExecutionStatus:
+      type: string
+      enum:
+      - SUCCEEDED
+      - FAILED
+      - TIMED_OUT
+    StateMachineTypeNotSupported: {}
+    includedDetails:
+      type: boolean
+    InvalidArn: {}
+    SensitiveData:
+      type: string
+      maxLength: 262144
+      format: password
+    TraceHeader:
+      type: string
+      pattern: \p{ASCII}*
+      minLength: 0
+      maxLength: 256
+    SensitiveError:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
+    CloudWatchEventsExecutionDataDetails:
+      type: object
+      properties:
+        included:
+          allOf:
+          - $ref: '#/components/schemas/includedDetails'
+          - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls. '
+      description: Provides details about execution input or output.
+    SensitiveCause:
+      type: string
+      minLength: 0
+      maxLength: 32768
+      format: password
+    BilledDuration:
+      type: integer
+      minimum: 0
+    StateMachineDeleting: {}
+    BilledMemoryUsed:
+      type: integer
+      minimum: 0
+    StateMachineDoesNotExist: {}
+    StartSyncExecutionInput:
+      type: object
+      required:
+      - stateMachineArn
+      title: StartSyncExecutionInput
+      properties:
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the state machine to execute.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: The name of the execution.
+        input:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>'
+        traceHeader:
+          allOf:
+          - $ref: '#/components/schemas/TraceHeader'
+          - description: Passes the X-Ray trace header. The trace header can also be passed in the request payload.
+    InvalidName: {}
+    StartSyncExecutionOutput:
+      type: object
+      required:
+      - executionArn
+      - startDate
+      - stopDate
+      - status
+      properties:
+        executionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) that identifies the execution.
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) that identifies the state machine.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: The name of the execution.
+        startDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the execution is started.
+        stopDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: If the execution has already ended, the date the execution stopped.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/SyncExecutionStatus'
+          - description: The current status of the execution.
+        error:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveError'
+          - description: The error code of the failure.
+        cause:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveCause'
+          - description: A more detailed explanation of the cause of the failure.
+        input:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+        inputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        output:
+          allOf:
+          - $ref: '#/components/schemas/SensitiveData'
+          - description: <p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>
+        outputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        traceHeader:
+          allOf:
+          - $ref: '#/components/schemas/TraceHeader'
+          - description: The X-Ray trace header that was passed to the execution.
+        billingDetails:
+          allOf:
+          - $ref: '#/components/schemas/BillingDetails'
+          - description: An object that describes workflow billing details, including billed duration and memory use.
+    Timestamp:
+      type: string
+      format: date-time
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

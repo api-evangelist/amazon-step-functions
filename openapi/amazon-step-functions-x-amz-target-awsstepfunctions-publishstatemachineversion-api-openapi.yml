@@ -1,0 +1,246 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.PublishStateMachineVersion API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.PublishStateMachineVersion'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.PublishStateMachineVersion:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: PublishStateMachineVersion
+      description: <p>Creates a <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html">version</a> from the current revision of a state machine. Use versions to create immutable snapshots of your state machine. You can start executions from versions either directly or with an alias. To create an alias, use <a>CreateStateMachineAlias</a>.</p> <p>You can publish up to 1000 versions for each state machine. You must manually delete unused versions using the <a>DeleteStateMachineVersion</a> API action.</p> <p> <code>PublishStateMachineVersion</code> is an idempotent API. It doesn't create a duplicate state machine version if it already exists for the current revision. Step Functions bases <code>PublishStateMachineVersion</code>'s idempotency check on the <code>stateMachineArn</code>, <code>name</code>, and <code>revisionId</code> parameters. Requests with the same parameters return a successful idempotent response. If you don't specify a <code>revisionId</code>, Step Functions checks for a previously published version of the state machine's current revision.</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>DeleteStateMachineVersion</a> </p> </li> <li> <p> <a>ListStateMachineVersions</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishStateMachineVersionOutput'
+              examples:
+                PublishStateMachineVersion200Example:
+                  summary: Default PublishStateMachineVersion 200
+                  x-microcks-default: true
+                  value:
+                    creationDate: example-value
+                    stateMachineVersionArn: arn:aws:service:us-east-1:123456789012:resource/example
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+              examples:
+                PublishStateMachineVersion480Example:
+                  summary: Default PublishStateMachineVersion 480
+                  x-microcks-default: true
+                  value: example-value
+        '481':
+          description: StateMachineDeleting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDeleting'
+              examples:
+                PublishStateMachineVersion481Example:
+                  summary: Default PublishStateMachineVersion 481
+                  x-microcks-default: true
+                  value: example-value
+        '482':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+              examples:
+                PublishStateMachineVersion482Example:
+                  summary: Default PublishStateMachineVersion 482
+                  x-microcks-default: true
+                  value: example-value
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+              examples:
+                PublishStateMachineVersion483Example:
+                  summary: Default PublishStateMachineVersion 483
+                  x-microcks-default: true
+                  value: example-value
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+              examples:
+                PublishStateMachineVersion484Example:
+                  summary: Default PublishStateMachineVersion 484
+                  x-microcks-default: true
+                  value: example-value
+        '485':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+              examples:
+                PublishStateMachineVersion485Example:
+                  summary: Default PublishStateMachineVersion 485
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishStateMachineVersionInput'
+            examples:
+              PublishStateMachineVersionRequestExample:
+                summary: Default PublishStateMachineVersion request
+                x-microcks-default: true
+                value:
+                  stateMachineArn: arn:aws:service:us-east-1:123456789012:resource/example
+                  revisionId: example-value
+                  description: example-value
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.PublishStateMachineVersion
+      summary: Amazon Publish State Machine Version
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.PublishStateMachineVersion'
+components:
+  schemas:
+    RevisionId:
+      type: string
+    ValidationException: {}
+    InvalidArn: {}
+    ServiceQuotaExceededException: {}
+    StateMachineDeleting: {}
+    VersionDescription:
+      type: string
+      maxLength: 256
+      format: password
+    ConflictException: {}
+    StateMachineDoesNotExist: {}
+    Timestamp:
+      type: string
+      format: date-time
+    PublishStateMachineVersionInput:
+      type: object
+      required:
+      - stateMachineArn
+      title: PublishStateMachineVersionInput
+      properties:
+        stateMachineArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) of the state machine.
+        revisionId:
+          allOf:
+          - $ref: '#/components/schemas/RevisionId'
+          - description: <p>Only publish the state machine version if the current state machine's revision ID matches the specified ID.</p> <p>Use this option to avoid publishing a version if the state machine changed since you last updated it. If the specified revision ID doesn't match the state machine's current revision ID, the API returns <code>ConflictException</code>.</p> <note> <p>To specify an initial revision ID for a state machine with no revision ID assigned, specify the string <code>INITIAL</code> for the <code>revisionId</code> parameter. For example, you can specify a <code>revisionID</code> of <code>INITIAL</code> when you create a state machine using the <a>CreateStateMachine</a> API action.</p> </note>
+        description:
+          allOf:
+          - $ref: '#/components/schemas/VersionDescription'
+          - description: An optional description of the state machine version.
+    PublishStateMachineVersionOutput:
+      type: object
+      required:
+      - creationDate
+      - stateMachineVersionArn
+      properties:
+        creationDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the version was created.
+        stateMachineVersionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) (ARN) that identifies the state machine version.
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+  parameters:
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/

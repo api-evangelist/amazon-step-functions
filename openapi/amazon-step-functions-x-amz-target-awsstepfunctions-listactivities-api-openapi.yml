@@ -1,0 +1,220 @@
+openapi: 3.1.0
+info:
+  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.ListActivities API'
+  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
+  version: '2016-11-23'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/contact-us/
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://states.{region}.amazonaws.com
+  description: Amazon Step Functions Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+security:
+- sigv4Auth: []
+tags:
+- name: '#X Amz Target=AWSStepFunctions.ListActivities'
+paths:
+  /#X-Amz-Target=AWSStepFunctions.ListActivities:
+    parameters:
+    - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+    - $ref: '#/components/parameters/X-Amz-Date'
+    - $ref: '#/components/parameters/X-Amz-Algorithm'
+    - $ref: '#/components/parameters/X-Amz-Credential'
+    - $ref: '#/components/parameters/X-Amz-Security-Token'
+    - $ref: '#/components/parameters/X-Amz-Signature'
+    - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListActivities
+      description: <p>Lists the existing activities.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListActivitiesOutput'
+              examples:
+                ListActivities200Example:
+                  summary: Default ListActivities 200
+                  x-microcks-default: true
+                  value:
+                    activities: example-value
+                    nextToken: example-value
+        '480':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+              examples:
+                ListActivities480Example:
+                  summary: Default ListActivities 480
+                  x-microcks-default: true
+                  value: example-value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListActivitiesInput'
+            examples:
+              ListActivitiesRequestExample:
+                summary: Default ListActivities request
+                x-microcks-default: true
+                value:
+                  maxResults: example-value
+                  nextToken: example-value
+      parameters:
+      - name: maxResults
+        in: query
+        schema:
+          type: string
+        description: Pagination limit
+        required: false
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        description: Pagination token
+        required: false
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - AWSStepFunctions.ListActivities
+      summary: Amazon List Activities
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      tags:
+      - '#X Amz Target=AWSStepFunctions.ListActivities'
+components:
+  schemas:
+    ActivityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivityListItem'
+    ListActivitiesInput:
+      type: object
+      title: ListActivitiesInput
+      properties:
+        maxResults:
+          allOf:
+          - $ref: '#/components/schemas/PageSize'
+          - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/PageToken'
+          - description: If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    InvalidToken: {}
+    Timestamp:
+      type: string
+      format: date-time
+    ListActivitiesOutput:
+      type: object
+      required:
+      - activities
+      properties:
+        activities:
+          allOf:
+          - $ref: '#/components/schemas/ActivityList'
+          - description: The list of activities.
+        nextToken:
+          allOf:
+          - $ref: '#/components/schemas/PageToken'
+          - description: If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.
+    PageToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    PageSize:
+      type: integer
+      minimum: 0
+      maximum: 1000
+    ActivityListItem:
+      type: object
+      required:
+      - activityArn
+      - name
+      - creationDate
+      properties:
+        activityArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: The Amazon Resource Name (ARN) that identifies the activity.
+        name:
+          allOf:
+          - $ref: '#/components/schemas/Name'
+          - description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+        creationDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date the activity is created.
+      description: Contains details about an activity.
+  parameters:
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    sigv4Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication
+externalDocs:
+  description: Amazon Step Functions API Reference
+  url: https://docs.aws.amazon.com/step-functions/latest/apireference/
