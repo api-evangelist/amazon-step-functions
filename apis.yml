@@ -3,36 +3,827 @@ description: >-
   Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications
   and microservices using visual workflows, enabling you to build and update state machines that react to events, manage
   retries, and orchestrate complex business processes.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/step-functions/
 created: '2024-01-15'
 modified: '2026-05-19'
 apis:
-  - name: Amazon Step Functions API
-    description: >-
-      Core API for creating and managing state machines and executions in AWS Step Functions, enabling serverless
-      workflow orchestration for coordinating distributed applications and microservices.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/step-functions/
-    baseURL: https://states.amazonaws.com
-    tags:
-      - AWS
-      - Orchestration
-      - Serverless
-      - State Machine
-      - Workflow
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
-      - type: OpenAPI
-        url: openapi/amazon-step-functions.yaml
-      - type: GettingStarted
-        url: https://aws.amazon.com/step-functions/
-      - type: Pricing
-        url: https://aws.amazon.com/step-functions/pricing/
-      - type: FAQ
-        url: https://aws.amazon.com/step-functions/faqs/
+- aid: amazon-step-functions:amazon-step-functions-executions-api
+  name: Amazon Step Functions Executions API
+  description: Operations for starting, stopping, describing, and listing executions
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - Executions
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-executions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: amazon-step-functions:amazon-step-functions-history-api
+  name: Amazon Step Functions History API
+  description: Operations for retrieving execution history events
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: amazon-step-functions:amazon-step-functions-state-machines-api
+  name: Amazon Step Functions State Machines API
+  description: Operations for creating, updating, describing, and deleting state machines
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - State Machines
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-state-machines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-createactivity-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.CreateActivity API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.CreateActivity API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.createactivity.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.CreateActivity'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-createactivity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-createstatemachine-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.CreateStateMachine API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.CreateStateMachine API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.createstatemachine.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.CreateStateMachine'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-createstatemachine-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-createstatemachinealias-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.CreateStateMachineAlias API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.CreateStateMachineAlias API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.createstatemachinealias.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.CreateStateMachineAlias'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-createstatemachinealias-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-deleteactivity-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DeleteActivity API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DeleteActivity API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.deleteactivity.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DeleteActivity'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-deleteactivity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachine-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DeleteStateMachine API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DeleteStateMachine API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.deletestatemachine.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DeleteStateMachine'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachine-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachinealias-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DeleteStateMachineAlias API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DeleteStateMachineAlias API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.deletestatemachinealias.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DeleteStateMachineAlias'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachinealias-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachineversion-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DeleteStateMachineVersion API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DeleteStateMachineVersion API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.deletestatemachineversion.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DeleteStateMachineVersion'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-deletestatemachineversion-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describeactivity-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeActivity API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeActivity API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.describeactivity.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeActivity'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describeactivity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describeexecution-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeExecution API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeExecution API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.describeexecution.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeExecution'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describeexecution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describemaprun-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeMapRun API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeMapRun API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.describemaprun.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeMapRun'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describemaprun-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachine-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeStateMachine API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeStateMachine API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.describestatemachine.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeStateMachine'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachine-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachinealias-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeStateMachineAlias API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeStateMachineAlias API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.describestatemachinealias.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeStateMachineAlias'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachinealias-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachineforexecution-api
+  name: >-
+    Amazon Step Functions #X Amz Target=AWSStepFunctions.DescribeStateMachineForExecution API
+  description: >-
+    The #X Amz Target=AWSStepFunctions.DescribeStateMachineForExecution API from Amazon Step Functions
+    — 1 operation(s) for #x amz target=awsstepfunctions.describestatemachineforexecution.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.DescribeStateMachineForExecution'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-describestatemachineforexecution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-getactivitytask-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.GetActivityTask API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.GetActivityTask API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.getactivitytask.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.GetActivityTask'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-getactivitytask-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-getexecutionhistory-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.GetExecutionHistory API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.GetExecutionHistory API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.getexecutionhistory.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.GetExecutionHistory'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-getexecutionhistory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-listactivities-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListActivities API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListActivities API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.listactivities.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListActivities'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-listactivities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-listexecutions-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListExecutions API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListExecutions API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.listexecutions.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListExecutions'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-listexecutions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-listmapruns-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListMapRuns API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListMapRuns API from Amazon Step Functions — 1 operation(s) for
+    #x amz target=awsstepfunctions.listmapruns.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListMapRuns'
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-x-amz-target-awsstepfunctions-listmapruns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachinealiases-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListStateMachineAliases API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListStateMachineAliases API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.liststatemachinealiases.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListStateMachineAliases'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachinealiases-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachines-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListStateMachines API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListStateMachines API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.liststatemachines.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListStateMachines'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachineversions-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListStateMachineVersions API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListStateMachineVersions API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.liststatemachineversions.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListStateMachineVersions'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-liststatemachineversions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-listtagsforresource-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.ListTagsForResource API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.ListTagsForResource API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.listtagsforresource.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.ListTagsForResource'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-listtagsforresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-publishstatemachineversion-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.PublishStateMachineVersion API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.PublishStateMachineVersion API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.publishstatemachineversion.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.PublishStateMachineVersion'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-publishstatemachineversion-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-sendtaskfailure-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.SendTaskFailure API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.SendTaskFailure API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.sendtaskfailure.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.SendTaskFailure'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-sendtaskfailure-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-sendtaskheartbeat-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.SendTaskHeartbeat API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.SendTaskHeartbeat API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.sendtaskheartbeat.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.SendTaskHeartbeat'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-sendtaskheartbeat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-sendtasksuccess-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.SendTaskSuccess API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.SendTaskSuccess API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.sendtasksuccess.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.SendTaskSuccess'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-sendtasksuccess-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-startexecution-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.StartExecution API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.StartExecution API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.startexecution.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.StartExecution'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-startexecution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-startsyncexecution-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.StartSyncExecution API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.StartSyncExecution API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.startsyncexecution.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.StartSyncExecution'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-startsyncexecution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-stopexecution-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.StopExecution API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.StopExecution API from Amazon Step Functions — 1 operation(s) for
+    #x amz target=awsstepfunctions.stopexecution.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.StopExecution'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-stopexecution-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-tagresource-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.TagResource API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.TagResource API from Amazon Step Functions — 1 operation(s) for
+    #x amz target=awsstepfunctions.tagresource.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.TagResource'
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-x-amz-target-awsstepfunctions-tagresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-untagresource-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.UntagResource API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.UntagResource API from Amazon Step Functions — 1 operation(s) for
+    #x amz target=awsstepfunctions.untagresource.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.UntagResource'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-untagresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-updatemaprun-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.UpdateMapRun API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.UpdateMapRun API from Amazon Step Functions — 1 operation(s) for
+    #x amz target=awsstepfunctions.updatemaprun.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.UpdateMapRun'
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-step-functions-x-amz-target-awsstepfunctions-updatemaprun-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-updatestatemachine-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.UpdateStateMachine API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.UpdateStateMachine API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.updatestatemachine.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.UpdateStateMachine'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-updatestatemachine-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
+- aid: >-
+    amazon-step-functions:amazon-step-functions-x-amz-target-awsstepfunctions-updatestatemachinealias-api
+  name: 'Amazon Step Functions #X Amz Target=AWSStepFunctions.UpdateStateMachineAlias API'
+  description: >-
+    The #X Amz Target=AWSStepFunctions.UpdateStateMachineAlias API from Amazon Step Functions — 1 operation(s)
+    for #x amz target=awsstepfunctions.updatestatemachinealias.
+  humanURL: https://aws.amazon.com/step-functions/
+  baseURL: https://states.amazonaws.com
+  tags:
+  - '#X Amz Target=AWSStepFunctions.UpdateStateMachineAlias'
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/amazon-step-functions-x-amz-target-awsstepfunctions-updatestatemachinealias-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/step-functions/latest/apireference/Welcome.html
+  - type: GettingStarted
+    url: https://aws.amazon.com/step-functions/
+  - type: Pricing
+    url: https://aws.amazon.com/step-functions/pricing/
+  - type: FAQ
+    url: https://aws.amazon.com/step-functions/faqs/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/amazon-step-functions/overview
   - type: AgenticAccess
     url: agentic-access/amazon-step-functions-agentic-access.yml
   - type: TrustCenter
