@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Step Functions Executions State Machines API",
+    "version": "2016-11-23"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "State Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Step Functions Create a state machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.CreateStateMachine",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a state machine. A state machine consists of a collection of states that can do work (Task states), make choices (Choice states), and stop an execution with a success or failure (Succeed or Fail states)."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions Describe a state machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.DescribeStateMachine",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides information about a state machine's definition, its IAM role ARN, and configuration. A qualified state machine ARN can refer to a specific version or alias."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions List state machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.ListStateMachines",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists the existing state machines. Returns a paginated list of state machine ARNs, names, types, and creation dates."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions Update a state machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.UpdateStateMachine",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing state machine by modifying its definition, roleArn, loggingConfiguration, or tracingConfiguration. Running executions will continue to use the previous definition and role ARN."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions Delete a state machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.DeleteStateMachine",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes a state machine. This is an asynchronous operation. It sets the state machine status to DELETING and begins the deletion process. A qualified state machine ARN can refer to a specific version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

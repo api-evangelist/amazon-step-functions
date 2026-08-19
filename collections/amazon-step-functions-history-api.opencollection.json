@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Step Functions Executions History API",
+    "version": "2016-11-23"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Step Functions Get execution history",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.GetExecutionHistory",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the history of the specified execution as a list of events. The results are returned in reverse chronological order if nextToken is returned. Events are ordered by the timeStamp field."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Step Functions Executions API",
+    "version": "2016-11-23"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Step Functions Start a state machine execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.StartExecution",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a state machine execution. A qualified state machine ARN can refer to a specific version or alias. StartExecution is idempotent for STANDARD workflows but not for EXPRESS workflows."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions Describe an execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.DescribeExecution",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions List executions of a state machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.ListExecutions",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists all executions of a state machine or a Map Run. Returns a paginated list of execution ARNs, names, statuses, and start dates."
+        },
+        {
+          "info": {
+            "name": "Amazon Step Functions Stop an execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://states.{region}.amazonaws.com/#X-Amz-Target=AWSStepFunctions.StopExecution",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops an execution. This API action is not supported by EXPRESS state machines. For EXPRESS state machines, use a Map Run to stop an execution."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
