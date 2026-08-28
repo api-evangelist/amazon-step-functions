@@ -3,6 +3,18 @@ description: >-
   Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications
   and microservices using visual workflows, enabling you to build and update state machines that react to events, manage
   retries, and orchestrate complex business processes.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: freemium
