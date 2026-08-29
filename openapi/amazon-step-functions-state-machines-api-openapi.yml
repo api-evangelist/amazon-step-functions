@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon Step Functions Executions State Machines API
+  title: Amazon Step Functions State Machines API
   description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
   version: '2016-11-23'
   contact:
@@ -215,6 +215,34 @@ components:
           maxLength: 256
       required:
       - key
+    CreateStateMachineOutput:
+      type: object
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the created state machine
+        creationDate:
+          type: string
+          format: date-time
+          description: The date the state machine was created
+    UpdateStateMachineInput:
+      type: object
+      required:
+      - stateMachineArn
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine to update
+        definition:
+          type: string
+          description: The Amazon States Language definition of the state machine
+        roleArn:
+          type: string
+          description: The ARN of the IAM role of the state machine
+        loggingConfiguration:
+          $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          $ref: '#/components/schemas/TracingConfiguration'
     TracingConfiguration:
       type: object
       description: Tracing configuration for a state machine
@@ -222,17 +250,6 @@ components:
         enabled:
           type: boolean
           description: When set to true, X-Ray tracing is enabled
-    ListStateMachinesOutput:
-      type: object
-      properties:
-        stateMachines:
-          type: array
-          description: List of state machines
-          items:
-            $ref: '#/components/schemas/StateMachineListItem'
-        nextToken:
-          type: string
-          description: Pagination token for next page of results
     DescribeStateMachineOutput:
       type: object
       properties:
@@ -268,26 +285,6 @@ components:
           $ref: '#/components/schemas/LoggingConfiguration'
         tracingConfiguration:
           $ref: '#/components/schemas/TracingConfiguration'
-    StateMachineListItem:
-      type: object
-      description: Contains details about a state machine
-      properties:
-        stateMachineArn:
-          type: string
-          description: The ARN of the state machine
-        name:
-          type: string
-          description: The name of the state machine
-        type:
-          type: string
-          description: The type of state machine
-          enum:
-          - STANDARD
-          - EXPRESS
-        creationDate:
-          type: string
-          format: date-time
-          description: The date the state machine was created
     CreateStateMachineInput:
       type: object
       required:
@@ -321,51 +318,38 @@ components:
           description: Tags to attach to the state machine
           items:
             $ref: '#/components/schemas/Tag'
-    UpdateStateMachineInput:
+    StateMachineListItem:
       type: object
-      required:
-      - stateMachineArn
+      description: Contains details about a state machine
       properties:
         stateMachineArn:
           type: string
-          description: The ARN of the state machine to update
-        definition:
+          description: The ARN of the state machine
+        name:
           type: string
-          description: The Amazon States Language definition of the state machine
-        roleArn:
+          description: The name of the state machine
+        type:
           type: string
-          description: The ARN of the IAM role of the state machine
-        loggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-        tracingConfiguration:
-          $ref: '#/components/schemas/TracingConfiguration'
-    CreateStateMachineOutput:
-      type: object
-      properties:
-        stateMachineArn:
-          type: string
-          description: The ARN of the created state machine
+          description: The type of state machine
+          enum:
+          - STANDARD
+          - EXPRESS
         creationDate:
           type: string
           format: date-time
           description: The date the state machine was created
+    ListStateMachinesOutput:
+      type: object
+      properties:
+        stateMachines:
+          type: array
+          description: List of state machines
+          items:
+            $ref: '#/components/schemas/StateMachineListItem'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
   parameters:
-    X-Amz-Target-DeleteStateMachine:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.DeleteStateMachine
-    X-Amz-Target-CreateStateMachine:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.CreateStateMachine
     X-Amz-Target-DescribeStateMachine:
       name: X-Amz-Target
       in: header
@@ -374,14 +358,14 @@ components:
         type: string
         enum:
         - AWSStepFunctions.DescribeStateMachine
-    X-Amz-Target-ListStateMachines:
+    X-Amz-Target-DeleteStateMachine:
       name: X-Amz-Target
       in: header
       required: true
       schema:
         type: string
         enum:
-        - AWSStepFunctions.ListStateMachines
+        - AWSStepFunctions.DeleteStateMachine
     X-Amz-Target-UpdateStateMachine:
       name: X-Amz-Target
       in: header
@@ -390,6 +374,22 @@ components:
         type: string
         enum:
         - AWSStepFunctions.UpdateStateMachine
+    X-Amz-Target-CreateStateMachine:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.CreateStateMachine
+    X-Amz-Target-ListStateMachines:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.ListStateMachines
   securitySchemes:
     sigv4Auth:
       type: apiKey

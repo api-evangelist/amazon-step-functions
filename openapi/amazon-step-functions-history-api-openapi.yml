@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amazon Step Functions Executions History API
+  title: Amazon Step Functions History API
   description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
   version: '2016-11-23'
   contact:
@@ -67,27 +67,7 @@ paths:
         '404':
           description: Execution does not exist
 components:
-  parameters:
-    X-Amz-Target-GetExecutionHistory:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.GetExecutionHistory
   schemas:
-    GetExecutionHistoryOutput:
-      type: object
-      properties:
-        events:
-          type: array
-          description: The list of events that occurred in the execution
-          items:
-            $ref: '#/components/schemas/HistoryEvent'
-        nextToken:
-          type: string
-          description: Pagination token for next page of results
     HistoryEvent:
       type: object
       description: Contains details about the events of an execution
@@ -234,6 +214,26 @@ components:
             timeoutInSeconds:
               type: integer
               description: The maximum allowed duration of the Lambda function
+    GetExecutionHistoryOutput:
+      type: object
+      properties:
+        events:
+          type: array
+          description: The list of events that occurred in the execution
+          items:
+            $ref: '#/components/schemas/HistoryEvent'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
+  parameters:
+    X-Amz-Target-GetExecutionHistory:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.GetExecutionHistory
   securitySchemes:
     sigv4Auth:
       type: apiKey

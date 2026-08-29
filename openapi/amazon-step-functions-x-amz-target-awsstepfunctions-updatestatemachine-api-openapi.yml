@@ -1,21 +1,116 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: 'Amazon Step Functions Executions #X Amz Target=AWSStepFunctions.UpdateStateMachine API'
-  description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
   version: '2016-11-23'
-  contact:
-    name: Amazon Web Services
-    url: https://aws.amazon.com/contact-us/
+  x-release: v4
+  title: 'AWS Step Functions #X Amz Target=AWSStepFunctions.UpdateStateMachine API'
+  description: <fullname>Step Functions</fullname> <p>Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on Amazon Web Services, your own servers, or any system that has access to Amazon Web Services. You can access and use Step Functions using the console, the Amazon Web Services SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">Step Functions Developer Guide</a> </i>.</p>
+  x-logo:
+    url: https://twitter.com/awscloud/profile_image?size=original
+    backgroundColor: '#FFFFFF'
   termsOfService: https://aws.amazon.com/service-terms/
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: https://github.com/mermade/aws2openapi
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: http://www.apache.org/licenses/
+  x-providerName: amazonaws.com
+  x-serviceName: states
+  x-origin:
+  - contentType: application/json
+    url: https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/states-2016-11-23.normal.json
+    converter:
+      url: https://github.com/mermade/aws2openapi
+      version: 1.0.0
+    x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct
+  x-apisguru-categories:
+  - cloud
+  x-preferred: true
 servers:
-- url: https://states.{region}.amazonaws.com
-  description: Amazon Step Functions Regional Endpoint
+- url: http://states.{region}.amazonaws.com
   variables:
     region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
       default: us-east-1
-      description: AWS Region
+  description: The AWS SFN multi-region endpoint
+- url: https://states.{region}.amazonaws.com
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - us-gov-west-1
+      - us-gov-east-1
+      - ca-central-1
+      - eu-north-1
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-south-1
+      - af-south-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-northeast-3
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-east-1
+      - ap-south-1
+      - sa-east-1
+      - me-south-1
+      default: us-east-1
+  description: The AWS SFN multi-region endpoint
+- url: http://states.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The AWS SFN endpoint for China (Beijing) and China (Ningxia)
+- url: https://states.{region}.amazonaws.com.cn
+  variables:
+    region:
+      description: The AWS region
+      enum:
+      - cn-north-1
+      - cn-northwest-1
+      default: cn-north-1
+  description: The AWS SFN endpoint for China (Beijing) and China (Ningxia)
 security:
-- sigv4Auth: []
+- hmac: []
 tags:
 - name: '#X Amz Target=AWSStepFunctions.UpdateStateMachine'
 paths:
@@ -190,6 +285,14 @@ paths:
       - '#X Amz Target=AWSStepFunctions.UpdateStateMachine'
 components:
   schemas:
+    StateMachineDeleting: {}
+    Timestamp:
+      type: string
+      format: date-time
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
     LoggingConfiguration:
       type: object
       properties:
@@ -206,58 +309,7 @@ components:
           - $ref: '#/components/schemas/LogDestinationList'
           - description: An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.
       description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
-    LogDestinationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/LogDestination'
-    TracingConfiguration:
-      type: object
-      properties:
-        enabled:
-          allOf:
-          - $ref: '#/components/schemas/Enabled'
-          - description: When set to <code>true</code>, X-Ray tracing is enabled.
-      description: 'Selects whether or not the state machine''s X-Ray tracing is enabled. Default is <code>false</code> '
-    RevisionId:
-      type: string
-    UpdateStateMachineOutput:
-      type: object
-      required:
-      - updateDate
-      properties:
-        updateDate:
-          allOf:
-          - $ref: '#/components/schemas/Timestamp'
-          - description: The date and time the state machine was updated.
-        revisionId:
-          allOf:
-          - $ref: '#/components/schemas/RevisionId'
-          - description: The revision identifier for the updated state machine.
-        stateMachineVersionArn:
-          allOf:
-          - $ref: '#/components/schemas/Arn'
-          - description: <p>The Amazon Resource Name (ARN) of the published state machine version.</p> <p>If the <code>publish</code> parameter isn't set to <code>true</code>, this field returns null.</p>
-    Definition:
-      type: string
-      minLength: 1
-      maxLength: 1048576
-      format: password
-    LogDestination:
-      type: object
-      properties:
-        cloudWatchLogsLogGroup:
-          allOf:
-          - $ref: '#/components/schemas/CloudWatchLogsLogGroup'
-          - description: An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the CloudFormation User Guide.
-      description: <p/>
-    CloudWatchLogsLogGroup:
-      type: object
-      properties:
-        logGroupArn:
-          allOf:
-          - $ref: '#/components/schemas/Arn'
-          - description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
-      description: <p/>
+    MissingRequiredParameter: {}
     UpdateStateMachineInput:
       type: object
       required:
@@ -292,14 +344,57 @@ components:
           allOf:
           - $ref: '#/components/schemas/VersionDescription'
           - description: <p>An optional description of the state machine version to publish.</p> <p>You can only specify the <code>versionDescription</code> parameter if you've set <code>publish</code> to <code>true</code>.</p>
-    InvalidTracingConfiguration: {}
-    ValidationException: {}
-    InvalidArn: {}
+    CloudWatchLogsLogGroup:
+      type: object
+      properties:
+        logGroupArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
+      description: <p/>
     Enabled:
       type: boolean
+    ConflictException: {}
+    IncludeExecutionData:
+      type: boolean
     ServiceQuotaExceededException: {}
+    InvalidArn: {}
     Publish:
       type: boolean
+    ValidationException: {}
+    LogDestinationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogDestination'
+    StateMachineDoesNotExist: {}
+    InvalidLoggingConfiguration: {}
+    InvalidDefinition: {}
+    UpdateStateMachineOutput:
+      type: object
+      required:
+      - updateDate
+      properties:
+        updateDate:
+          allOf:
+          - $ref: '#/components/schemas/Timestamp'
+          - description: The date and time the state machine was updated.
+        revisionId:
+          allOf:
+          - $ref: '#/components/schemas/RevisionId'
+          - description: The revision identifier for the updated state machine.
+        stateMachineVersionArn:
+          allOf:
+          - $ref: '#/components/schemas/Arn'
+          - description: <p>The Amazon Resource Name (ARN) of the published state machine version.</p> <p>If the <code>publish</code> parameter isn't set to <code>true</code>, this field returns null.</p>
+    TracingConfiguration:
+      type: object
+      properties:
+        enabled:
+          allOf:
+          - $ref: '#/components/schemas/Enabled'
+          - description: When set to <code>true</code>, X-Ray tracing is enabled.
+      description: 'Selects whether or not the state machine''s X-Ray tracing is enabled. Default is <code>false</code> '
+    InvalidTracingConfiguration: {}
     LogLevel:
       type: string
       enum:
@@ -307,28 +402,28 @@ components:
       - ERROR
       - FATAL
       - 'OFF'
-    InvalidDefinition: {}
-    IncludeExecutionData:
-      type: boolean
-    MissingRequiredParameter: {}
-    StateMachineDeleting: {}
+    Definition:
+      type: string
+      minLength: 1
+      maxLength: 1048576
+      format: password
     VersionDescription:
       type: string
       maxLength: 256
       format: password
-    ConflictException: {}
-    InvalidLoggingConfiguration: {}
-    StateMachineDoesNotExist: {}
-    Timestamp:
+    LogDestination:
+      type: object
+      properties:
+        cloudWatchLogsLogGroup:
+          allOf:
+          - $ref: '#/components/schemas/CloudWatchLogsLogGroup'
+          - description: An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the CloudFormation User Guide.
+      description: <p/>
+    RevisionId:
       type: string
-      format: date-time
-    Arn:
-      type: string
-      minLength: 1
-      maxLength: 256
   parameters:
-    X-Amz-SignedHeaders:
-      name: X-Amz-SignedHeaders
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
       in: header
       schema:
         type: string
@@ -339,8 +434,8 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Content-Sha256:
-      name: X-Amz-Content-Sha256
+    X-Amz-Credential:
+      name: X-Amz-Credential
       in: header
       schema:
         type: string
@@ -351,14 +446,14 @@ components:
       schema:
         type: string
       required: false
-    X-Amz-Security-Token:
-      name: X-Amz-Security-Token
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
       in: header
       schema:
         type: string
       required: false
-    X-Amz-Credential:
-      name: X-Amz-Credential
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
       in: header
       schema:
         type: string
@@ -370,11 +465,13 @@ components:
         type: string
       required: false
   securitySchemes:
-    sigv4Auth:
+    hmac:
       type: apiKey
       name: Authorization
       in: header
-      description: AWS Signature Version 4 authentication
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
 externalDocs:
-  description: Amazon Step Functions API Reference
-  url: https://docs.aws.amazon.com/step-functions/latest/apireference/
+  description: Amazon Web Services documentation
+  url: https://docs.aws.amazon.com/states/
+x-hasEquivalentPaths: true

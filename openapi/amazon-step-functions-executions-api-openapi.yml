@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Step Functions Executions API
   description: Amazon Step Functions is a serverless workflow orchestration service that lets you coordinate distributed applications and microservices using visual workflows. This API enables you to create and manage state machines, start and monitor executions, and retrieve execution history.
@@ -172,18 +172,40 @@ paths:
         '404':
           description: Execution does not exist
 components:
+  parameters:
+    X-Amz-Target-DescribeExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.DescribeExecution
+    X-Amz-Target-ListExecutions:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.ListExecutions
+    X-Amz-Target-StartExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.StartExecution
+    X-Amz-Target-StopExecution:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - AWSStepFunctions.StopExecution
   schemas:
-    ListExecutionsOutput:
-      type: object
-      properties:
-        executions:
-          type: array
-          description: List of executions
-          items:
-            $ref: '#/components/schemas/ExecutionListItem'
-        nextToken:
-          type: string
-          description: Pagination token for next page of results
     ExecutionListItem:
       type: object
       description: Contains details about an execution
@@ -215,6 +237,25 @@ components:
           type: string
           format: date-time
           description: The date the execution stopped
+    StartExecutionInput:
+      type: object
+      required:
+      - stateMachineArn
+      properties:
+        stateMachineArn:
+          type: string
+          description: The ARN of the state machine to execute
+        name:
+          type: string
+          description: Optional name for the execution. Must be unique for your AWS account, region, and state machine for 90 days.
+          minLength: 1
+          maxLength: 80
+        input:
+          type: string
+          description: The string that contains the JSON input data for the execution. Maximum length of 262144 characters.
+        traceHeader:
+          type: string
+          description: Passes the X-Ray trace header for the execution
     DescribeExecutionOutput:
       type: object
       properties:
@@ -257,25 +298,6 @@ components:
         cause:
           type: string
           description: A more detailed explanation of the cause of the failure
-    StartExecutionInput:
-      type: object
-      required:
-      - stateMachineArn
-      properties:
-        stateMachineArn:
-          type: string
-          description: The ARN of the state machine to execute
-        name:
-          type: string
-          description: Optional name for the execution. Must be unique for your AWS account, region, and state machine for 90 days.
-          minLength: 1
-          maxLength: 80
-        input:
-          type: string
-          description: The string that contains the JSON input data for the execution. Maximum length of 262144 characters.
-        traceHeader:
-          type: string
-          description: Passes the X-Ray trace header for the execution
     StartExecutionOutput:
       type: object
       properties:
@@ -286,39 +308,17 @@ components:
           type: string
           format: date-time
           description: The date the execution started
-  parameters:
-    X-Amz-Target-StopExecution:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.StopExecution
-    X-Amz-Target-StartExecution:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.StartExecution
-    X-Amz-Target-DescribeExecution:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.DescribeExecution
-    X-Amz-Target-ListExecutions:
-      name: X-Amz-Target
-      in: header
-      required: true
-      schema:
-        type: string
-        enum:
-        - AWSStepFunctions.ListExecutions
+    ListExecutionsOutput:
+      type: object
+      properties:
+        executions:
+          type: array
+          description: List of executions
+          items:
+            $ref: '#/components/schemas/ExecutionListItem'
+        nextToken:
+          type: string
+          description: Pagination token for next page of results
   securitySchemes:
     sigv4Auth:
       type: apiKey
