@@ -942,3 +942,5 @@ tags_raw:
   - State Machine
   - Workflow
 kind: company
+x-parent: aws
+x-relationship: product
